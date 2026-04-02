@@ -1,4 +1,4 @@
-﻿---
+---
 name: autoplan
 description: Use when a user request is broad or underspecified and you need to turn it into an executable implementation plan, optionally sharpening it with product and engineering review passes
 ---

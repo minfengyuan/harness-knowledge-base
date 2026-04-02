@@ -1,4 +1,4 @@
-﻿---
+---
 name: office-hours
 description: Use when a user wants to brainstorm a product idea, test whether something is worth building, or shape an early design before implementation
 ---

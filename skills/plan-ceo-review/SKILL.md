@@ -1,4 +1,4 @@
-﻿---
+---
 name: plan-ceo-review
 description: Use when a user wants product-level review of a plan, especially to challenge scope, ambition, and user value before implementation
 ---

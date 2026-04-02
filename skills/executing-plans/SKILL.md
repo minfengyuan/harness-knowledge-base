@@ -1,4 +1,4 @@
-﻿---
+---
 name: executing-plans
 description: Use when you have a written implementation plan to execute and want a disciplined flow with review checkpoints
 ---

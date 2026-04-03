@@ -1,4 +1,0 @@
-interface:
-  display_name: "Conventional Commits"
-  short_description: "Generate and validate Conventional Commit messages"
-  default_prompt: "Generate Conventional Commit messages from git changes and validate or rewrite existing commits according to v1.0.0."

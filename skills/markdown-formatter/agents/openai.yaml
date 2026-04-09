@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Formatter"
+  short_description: "Format and restyle Markdown to markdownlint style."
+  default_prompt: "Use $markdown-formatter to clean up these Markdown files to markdownlint-style conventions."

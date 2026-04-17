@@ -20,27 +20,21 @@ Several skills also ship supporting materials such as:
 - review or implementation prompts, for example files in `skills/subagent-driven-development/`
 - helper artifacts, for example `skills/systematic-debugging/find-polluter.sh`
 
-## Quick Start
+## Installation
 
-Browse the available skills:
+### For Humans
 
-```bash
-find skills -maxdepth 2 -type f | sort
+Fetch the installation guide and follow it:
+
+```text
+https://raw.githubusercontent.com/minfengyuan/harness-knowledge-base/refs/heads/main/README.md
 ```
 
-Open a skill definition:
+### For LLM Agents
 
-```bash
-sed -n '1,200p' skills/autoplan/SKILL.md
-```
+First, clone this repo into the Codex home directory.
 
-Start with these depending on the job:
-
-- vague request that needs a concrete implementation plan: `skills/autoplan/SKILL.md`
-- bug or failing test: `skills/systematic-debugging/SKILL.md`
-- feature or bugfix work: `skills/test-driven-development/SKILL.md`
-- final verification before claiming success: `skills/verification-before-completion/SKILL.md`
-- README creation or rewrite: `skills/better-readme/SKILL.md`
+Second, create soft links of every second-level directory and file under each top-level directory. If a matching top-level directory does not exist in the Codex home directory, create it first.
 
 ## Repository Structure
 
@@ -56,28 +50,6 @@ AGENTS.md
 ```
 
 Each skill directory is self-contained. `SKILL.md` explains when to use the skill, its workflow, and the expected output. Supporting files add references, examples, or helper prompts where needed.
-
-## Design Principles
-
-The skills in this repository are consistently direct and procedural. Common themes across the collection include:
-
-- narrow scope per skill
-- explicit decision rules
-- evidence before claims
-- strong workflow discipline
-- minimal, high-signal output
-
-The top-level `AGENTS.md` reinforces the same style: first-principles reasoning, early convergence, and concise outputs.
-
-## Examples
-
-A few representative skills:
-
-- `autoplan`: turns a broad request into an execution-ready implementation plan
-- `better-readme`: drafts a README from repository evidence rather than templates
-- `systematic-debugging`: requires root-cause investigation before proposing fixes
-- `test-driven-development`: enforces failing-test-first development
-- `verification-before-completion`: requires fresh verification before making success claims
 
 ## Contributing
 

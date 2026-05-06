@@ -32,9 +32,27 @@ https://raw.githubusercontent.com/minfengyuan/harness-knowledge-base/refs/heads/
 
 ### For LLM Agents
 
-First, clone this repo into the Codex home directory.
+#### Claude Code
 
-Second, create soft links of every second-level directory and file under each top-level directory. If a matching top-level directory does not exist in the Codex home directory, create it first.
+```bash
+git clone https://github.com/minfengyuan/harness-knowledge-base.git
+mkdir -p ~/.claude/skills
+for skill in harness-knowledge-base/skills/*/; do
+  ln -s "$(pwd)/$skill" ~/.claude/skills/
+done
+```
+
+To use the skills in a specific project instead, symlink into `.claude/skills/` at the project root.
+
+#### OpenAI Codex
+
+```bash
+git clone https://github.com/minfengyuan/harness-knowledge-base.git ~/.codex
+mkdir -p ~/.codex/skills
+for skill in ~/.codex/harness-knowledge-base/skills/*/; do
+  ln -s "$skill" ~/.codex/skills/
+done
+```
 
 ## Repository Structure
 

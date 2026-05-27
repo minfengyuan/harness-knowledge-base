@@ -1,6 +1,6 @@
 ---
 name: plan-eng-review
-description: Use when a written plan needs engineering review for architecture, data flow, testing, edge cases, performance, and operational safety before implementation
+description: Use proactively when a written plan needs engineering review for architecture, data flow, testing, edge cases, performance, and operational safety before implementation
 ---
 
 # Engineering Plan Review

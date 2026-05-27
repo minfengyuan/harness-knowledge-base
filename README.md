@@ -6,11 +6,11 @@ This repository is organized as a set of task-specific skill folders under `skil
 
 ## What's In This Repo
 
-The repository currently contains 16 skills, including:
+The repository currently contains 15 skills, including:
 
 - planning and scope shaping: `autoplan`, `office-hours`, `plan-ceo-review`, `plan-eng-review`
-- implementation workflow: `executing-plans`, `subagent-driven-development`, `dispatching-parallel-agents`
-- quality and verification: `test-driven-development`, `systematic-debugging`, `verification-before-completion`
+- implementation workflow: `executing-plans`, `subagent-driven-development`
+- quality and verification: `tdd`, `systematic-debugging`, `verification-before-completion`
 - documentation and formatting: `better-readme`, `conventional-commits`, `recipe-formatter`
 
 Several skills also ship supporting materials such as:

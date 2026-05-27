@@ -269,7 +269,7 @@ Done!
 - **writing-plans** - Creates the plan this skill executes
 
 **Subagents should use:**
-- **test-driven-development** - Subagents follow TDD for each task
+- **tdd** - Subagents follow TDD for each task
 
 **Alternative workflow:**
 - **executing-plans** - Use for parallel session instead of same-session execution

@@ -52,7 +52,6 @@ Stop and ask for clarification rather than guessing when:
 After all tasks are complete and verified:
 - run the final verification set for the whole change
 - summarize what changed and what was verified
-- complete the branch using `finishing-a-development-branch`
 
 ## Review Expectations
 
@@ -71,4 +70,3 @@ During execution:
 Related skills:
 - `subagent-driven-development` for execution with subagents
 - `verification-before-completion` before claiming success
-- `finishing-a-development-branch` after all work is complete

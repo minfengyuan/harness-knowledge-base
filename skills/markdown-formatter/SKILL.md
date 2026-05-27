@@ -1,6 +1,6 @@
 ---
 name: markdown-formatter
-description: "Format or restyle Markdown files to markdownlint-style conventions. Use when Codex needs to clean up `.md` or `.markdown` files, normalize headings, lists, spacing, fenced code blocks, or surrounding blank lines, or make Markdown more consistent without changing meaning. Triggers on: markdown formatting, markdown restyling, markdownlint style, clean up README formatting, normalize markdown."
+description: "Format or restyle Markdown files to markdownlint-style conventions. Use when you need to clean up `.md` or `.markdown` files, normalize headings, lists, spacing, fenced code blocks, or surrounding blank lines, or make Markdown more consistent without changing meaning. Triggers on: markdown formatting, markdown restyling, markdownlint style, clean up README formatting, normalize markdown."
 ---
 
 # Markdown Formatter

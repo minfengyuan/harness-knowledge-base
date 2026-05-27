@@ -1,6 +1,6 @@
 # Harness Knowledge Base
 
-A small, opinionated knowledge base of reusable Codex skills for planning, implementation, debugging, review, and documentation workflows.
+A small, opinionated knowledge base of reusable AI agent skills for planning, implementation, debugging, review, and documentation workflows.
 
 This repository is organized as a set of task-specific skill folders under `skills/`. Each skill is defined primarily by a `SKILL.md` file, and some skills include supporting references, prompts, or helper scripts.
 
@@ -11,7 +11,6 @@ The repository currently contains 16 skills, including:
 - planning and scope shaping: `autoplan`, `office-hours`, `plan-ceo-review`, `plan-eng-review`
 - implementation workflow: `executing-plans`, `subagent-driven-development`, `dispatching-parallel-agents`
 - quality and verification: `test-driven-development`, `systematic-debugging`, `verification-before-completion`
-- review workflow: `requesting-code-review`, `receiving-code-review`, `finishing-a-development-branch`
 - documentation and formatting: `better-readme`, `conventional-commits`, `recipe-formatter`
 
 Several skills also ship supporting materials such as:
@@ -31,6 +30,8 @@ https://raw.githubusercontent.com/minfengyuan/harness-knowledge-base/refs/heads/
 ```
 
 ### For LLM Agents
+
+Below are example installation commands for common platforms. Adapt the symlink target to your agent's skills directory.
 
 #### Claude Code
 

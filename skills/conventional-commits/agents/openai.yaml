@@ -1,6 +1,0 @@
-interface:
-  display_name: "Conventional Commits"
-  short_description: "Generate, validate, and rewrite Conventional Commit messages."
-
-policy:
-  allow_implicit_invocation: false

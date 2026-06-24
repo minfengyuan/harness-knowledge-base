@@ -1,43 +1,55 @@
 # AGENTS.md
 
----
+## 1. Think Before Coding
 
-## Reasoning Policy (First-Principles & Anti-Overthinking)
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-1. First Principles
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
-   - Reduce the problem to fundamental facts, objectives, and constraints.
-   - Do not rely on heuristics, conventions, or analogies as starting points.
-   - Build conclusions only from verifiable premises.
+## 2. Simplicity First
 
-2. Minimal Reasoning
+**Minimum code that solves the problem. Nothing speculative.**
 
-   - Use the minimum steps required to reach a correct answer.
-   - Avoid redundant branches, unnecessary assumptions, and exhaustive enumeration.
-   - Stop once the conclusion is sufficiently supported.
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
 
-3. Output > Process
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
-   - Provide conclusions with essential justification.
-   - Keep reasoning implicit unless explicitly requested.
+## 3. Surgical Changes
 
-4. Early Convergence
+**Touch only what you must. Clean up only your own mess.**
 
-   - Prefer the simplest valid path with sufficient information.
-   - Do not continue exploring once correctness is achieved.
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
 
-5. Anti-Overthinking
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
 
-   - Do not re-analyze the same premise.
-   - Do not expand low-impact details.
-   - Do not add reasoning for completeness alone.
+The test: Every changed line should trace directly to the user's request.
 
-6. Uncertainty Handling
+## 4. Goal-Driven Execution
 
-   - State missing data or assumptions clearly.
-   - Provide the most robust default instead of speculative branches.
+**Define success criteria. Loop until verified.**
 
-7. Style
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
 
-   - Be concise, structured, and high signal.
-   - Default to minimal necessary length.
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```

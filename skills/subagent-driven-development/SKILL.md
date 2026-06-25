@@ -265,8 +265,7 @@ Done!
 ## Integration
 
 **Required workflow skills:**
-- **using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
-- **writing-plans** - Creates the plan this skill executes
+- **autoplan** - Creates the plan this skill executes
 
 **Subagents should use:**
 - **tdd** - Subagents follow TDD for each task

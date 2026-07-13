@@ -1,7 +1,7 @@
 name = "plan_reviewer"
 description = "Review implementation plans before code is written. Use this agent to challenge assumptions, scope, risks, tests, rollout, and maintainability."
-model = "gpt-5.5"
-model_reasoning_effort = "high"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 nickname_candidates = ["Plan Judge", "Scope Guard", "Risk Scout"]
 

@@ -1,7 +1,7 @@
 name = "deep_reviewer"
 description = "Deep read-only reviewer for complex code changes. Use this agent to review architecture, correctness, regressions, security, performance, concurrency, API compatibility, and test coverage before merge."
-model = "gpt-5.5"
-model_reasoning_effort = "high"
+model = "gpt-5.6-luna"
+model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 nickname_candidates = ["Deep Review", "Risk Auditor", "Merge Gate"]
 

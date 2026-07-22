@@ -1,6 +1,6 @@
 ---
 name: dev-mode
-description: Coordinate the project's custom scout, researcher, context-builder, planner, worker, reviewer, oracle, and delegate subagents for substantial software-development tasks when delegation, parallel read-only discovery, context isolation, bounded execution, or independent review creates clear value. Keep unresolved decisions and final acceptance in the main thread. Use for complex development work; do not use for casual questions, simple lookups, obvious single-file edits, or tasks whose coordination cost exceeds the work.
+description: Coordinate role-guided scout, researcher, context-builder, planner, worker, reviewer, oracle, and delegate subagents for substantial software-development tasks when delegation, parallel read-only discovery, context isolation, bounded execution, or independent review creates clear value. Keep unresolved decisions and final acceptance in the main thread. Use for complex development work; do not use for casual questions, simple lookups, obvious single-file edits, or tasks whose coordination cost exceeds the work.
 ---
 
 # Dev Mode
@@ -15,7 +15,7 @@ Activating Dev Mode does not require spawning a subagent. Keep clear, short, low
 
 ## Dispatch Gate
 
-Every `spawn_agent` call must explicitly pass `agent_type` as exactly one of:
+The available `spawn_agent` interface accepts `task_name`, `message`, and `fork_turns`. It does not select a model, reasoning effort, sandbox, or Agent profile. Treat these names as routing roles, not tool arguments:
 
 - `scout`
 - `researcher`
@@ -26,11 +26,11 @@ Every `spawn_agent` call must explicitly pass `agent_type` as exactly one of:
 - `oracle`
 - `delegate`
 
-Never omit `agent_type` and never silently substitute a generic role. Use `task_name` only to label the child task; it does not select an Agent profile.
+Choose the role whose contract matches the work, encode that role and its boundaries in `message`, and use a descriptive snake_case `task_name` to label the child task. `task_name` does not select an Agent profile.
 
-If a required profile is unavailable, keep safe work in the main thread. When that profile is essential, tell the user to restart Codex or open a new task so project Agent configuration can reload. Read [references/agent-profiles.md](references/agent-profiles.md) only when installing, repairing, verifying, or changing the profiles.
+Keep safe work in the main thread when the current interface cannot enforce a capability the task requires. If a specific model or system-enforced sandbox is essential, report that the active runtime cannot guarantee it instead of assuming project configuration is loaded. Read [references/agent-profiles.md](references/agent-profiles.md) only when installing, repairing, verifying, or changing the optional profile configuration.
 
-Keep all routing and fan-out in the main thread. Children never spawn descendants; they return evidence, artifacts, or blockers to the parent.
+As a Dev Mode policy, keep all routing and fan-out in the main thread. In every child brief, instruct the child not to spawn descendants and to return evidence, artifacts, or blockers to the parent. This is a task constraint, not a runtime capability limit.
 
 ## Required Rules
 
@@ -49,7 +49,7 @@ Before every spawn, provide a self-contained brief with these labeled fields:
 - `Outcome`: the independently finishable result the child must return.
 - `Benefit`: why delegation is better than keeping this slice in the main thread.
 - `Sources`: every path, URL, plan, dataset, or raw artifact required for factual work.
-- `Scope`: allowed reads and writes, ownership, exclusions, and external-action authority.
+- `Scope`: allowed reads and writes, ownership, exclusions, external-action authority, and the instruction not to spawn descendants.
 - `Checks`: acceptance criteria and validation the child owns.
 - `Stop when`: the completion, blocker, or evidence threshold that ends the turn.
 - `Return`: the concise report or artifact format expected by the parent.
@@ -73,13 +73,13 @@ Use `fork_turns="none"` by default and give every child complete sources and con
 
 | Role | Route when | Boundary |
 | --- | --- | --- |
-| `scout` | Map local entry points, dependencies, call paths, tests, and likely change surfaces. | Read-only, targeted repository reconnaissance. |
-| `researcher` | Verify current external documentation, specifications, versions, or primary evidence. | Read-only, source-backed research. |
-| `context-builder` | Consolidate broad local and external evidence so the next role does not repeat discovery. | Read-only, high-signal handoff. |
-| `planner` | Turn approved requirements and gathered context into an executable, verifiable plan. | Read-only; no implementation or hidden product decisions. |
+| `scout` | Map local entry points, dependencies, call paths, tests, and likely change surfaces. | Must not write; targeted repository reconnaissance. |
+| `researcher` | Verify current external documentation, specifications, versions, or primary evidence. | Must not write; source-backed research. |
+| `context-builder` | Consolidate broad local and external evidence so the next role does not repeat discovery. | Must not write; high-signal handoff. |
+| `planner` | Turn approved requirements and gathered context into an executable, verifiable plan. | Must not write, implement, or make hidden product decisions. |
 | `worker` | Implement the primary approved change with explicit file ownership and checks. | Main workspace writer. |
-| `reviewer` | Apply fresh judgment to complex, consequential, uncertain, or hard-to-check results. | Read-only; no fixes. |
-| `oracle` | Detect decision drift, contradictions, or hidden assumptions in a high-risk trajectory. | Read-only advisory role with inherited context. |
+| `reviewer` | Apply fresh judgment to complex, consequential, uncertain, or hard-to-check results. | Must not write or apply fixes. |
+| `oracle` | Detect decision drift, contradictions, or hidden assumptions in a high-risk trajectory. | Must not write; advisory role with inherited context. |
 | `delegate` | Complete a simple, general, bounded auxiliary task that does not need another specialist. | May write only its explicitly owned, isolated target. |
 
 Do not run `worker` and `delegate` concurrently on overlapping files or the same mutable target. Parallel writers require disjoint, stable ownership; otherwise run them sequentially.

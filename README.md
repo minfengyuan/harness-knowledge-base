@@ -31,44 +31,46 @@ https://raw.githubusercontent.com/minfengyuan/harness-knowledge-base/refs/heads/
 
 ### For LLM Agents
 
-Below are example installation commands for common platforms. Adapt the symlink target to your agent's skills directory.
+Install skills as symlinks from this repository's `skills/` directory. Before installing, ask the user whether to place the symlinks in the agent's global skills directory or the skills directory at the current project root.
 
-#### Claude Code
+Then show the available skills and ask which ones to install. Install all skills by default when the user does not make a selection:
 
-```bash
-git clone https://github.com/minfengyuan/harness-knowledge-base.git
-mkdir -p ~/.claude/skills
-for skill in harness-knowledge-base/skills/*/; do
-  ln -s "$(pwd)/$skill" ~/.claude/skills/
-done
-```
-
-To use the skills in a specific project instead, symlink into `.claude/skills/` at the project root.
-
-#### OpenAI Codex
-
-```bash
-git clone https://github.com/minfengyuan/harness-knowledge-base.git ~/.codex
-mkdir -p ~/.codex/skills
-for skill in ~/.codex/harness-knowledge-base/skills/*/; do
-  ln -s "$skill" ~/.codex/skills/
-done
-```
+- `autoplan`
+- `conventional-commits`
+- `executing-plans`
+- `grilling`
+- `handoff`
+- `office-hours`
+- `pi-coding-agent`
+- `plan-ceo-review`
+- `plan-eng-review`
+- `progressive-disclosure-agents-md`
+- `recipe-formatter`
+- `subagent-driven-development`
+- `systematic-debugging`
+- `tdd`
+- `verification-before-completion`
 
 ## Repository Structure
 
 ```text
+.codex/
+  agents/              # Codex agent configuration
+  skills/
+    dev-mode/          # bundled Codex skill
 skills/
   <skill-name>/
     SKILL.md
     references/        # optional supporting docs
-    scripts/           # optional helpers
-    prompts/templates  # optional workflow assets
-LICENSE
+    prompts/           # optional workflow prompts
+    scripts/           # optional helpers or examples
+    metadata.json      # optional skill metadata
 AGENTS.md
+LICENSE
+README.md
 ```
 
-Each skill directory is self-contained. `SKILL.md` explains when to use the skill, its workflow, and the expected output. Supporting files add references, examples, or helper prompts where needed.
+Each skill directory is self-contained. `SKILL.md` explains when to use the skill, its workflow, and the expected output. Supporting files can add references, prompts, scripts, examples, or metadata where needed.
 
 ## Contributing
 
@@ -87,7 +89,7 @@ This repository was influenced by and learned from a few strong open-source exam
 
 - [obra/superpowers](https://github.com/obra/superpowers)
 - [garrytan/gstack](https://github.com/garrytan/gstack)
-- [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+- [mattpocock/skills](https://github.com/mattpocock/skills)
 
 ## License
 

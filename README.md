@@ -83,13 +83,18 @@ If you add or revise a skill, keep the format consistent with the existing colle
 - add references or helper assets only when they materially improve execution
 - keep instructions concrete, testable, and free of template filler
 
+## Recommended Projects
+
+- [mattpocock/skills](https://github.com/mattpocock/skills)
+- [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph)
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
+
 ## Thanks
 
 This repository was influenced by and learned from a few strong open-source examples and workflows:
 
 - [obra/superpowers](https://github.com/obra/superpowers)
 - [garrytan/gstack](https://github.com/garrytan/gstack)
-- [mattpocock/skills](https://github.com/mattpocock/skills)
 
 ## License
 

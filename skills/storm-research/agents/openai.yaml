@@ -1,0 +1,4 @@
+interface:
+  display_name: "Storm Research"
+  short_description: "Parallel multi-perspective evidence research"
+  default_prompt: "Use $storm-research to investigate this topic from multiple perspectives and produce a source-backed research brief."

@@ -1,4 +1,4 @@
 interface:
   display_name: "照片插画风格转换"
-  short_description: "将上传照片转换为七种精选的极简、手绘与纸艺插画风格"
-  default_prompt: "使用 $photo-illustration-styles 将我上传的照片转换为最合适的插画风格。"
+  short_description: "为上传照片推荐并转换七种精选的极简、手绘与纸艺插画风格"
+  default_prompt: "使用 $photo-illustration-styles 分析我上传的照片并推荐 2–3 种合适的插画风格。"

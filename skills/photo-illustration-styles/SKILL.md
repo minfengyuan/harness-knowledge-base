@@ -1,6 +1,6 @@
 ---
 name: photo-illustration-styles
-description: Transform an uploaded or local photograph into one of eight curated illustration styles with built-in image generation while preserving the source subjects, counts, poses, spatial relationships, and recognizable features. Support standalone illustrations or optional 3:4 vertical photo-and-illustration composites with user-selected text. Use when the user asks to turn a photo into a minimal paper hand-drawn, acrylic hand-painted, minimal abstract poetic, naive whimsical hand-drawn, flat picture-book, minimal geometric deconstruction, handcrafted origami, or asks Codex to recommend two or three fitting styles before generation.
+description: Transform an uploaded or local photograph into one of eight curated illustration styles with built-in image generation while preserving the source subjects, counts, poses, spatial relationships, and recognizable features. Support standalone illustrations or optional 3:4 vertical photo-and-illustration composites with user-selected text. Use when the user asks to turn a photo into a minimal paper hand-drawn, acrylic hand-painted, minimal abstract poetic, naive whimsical hand-drawn, flat picture-book, minimal geometric deconstruction, handcrafted origami, or asks agent to recommend two or three fitting styles before generation.
 ---
 
 # 照片插画风格转换

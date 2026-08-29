@@ -1,11 +1,11 @@
 ---
 name: photo-illustration-styles
-description: Transform an uploaded or local photograph into one of seven curated illustration styles with built-in image generation while preserving the source subjects, counts, poses, spatial relationships, and recognizable features. Support standalone illustrations or optional 3:4 vertical photo-and-illustration composites with user-selected text. Use when the user asks to turn a photo into a minimal paper hand-drawn, acrylic hand-painted, minimal abstract poetic, naive whimsical hand-drawn, flat picture-book, minimal geometric deconstruction, or handcrafted origami illustration, or asks Codex to recommend two or three fitting styles before generation.
+description: Transform an uploaded or local photograph into one of eight curated illustration styles with built-in image generation while preserving the source subjects, counts, poses, spatial relationships, and recognizable features. Support standalone illustrations or optional 3:4 vertical photo-and-illustration composites with user-selected text. Use when the user asks to turn a photo into a minimal paper hand-drawn, acrylic hand-painted, minimal abstract poetic, naive whimsical hand-drawn, flat picture-book, minimal geometric deconstruction, handcrafted origami, or asks Codex to recommend two or three fitting styles before generation.
 ---
 
 # 照片插画风格转换
 
-把照片作为唯一内容来源生成插画。用户未指定风格时，先推荐 2–3 个候选并等待选择；风格确定后，继续确认是否拼接原图和添加文字，所有选择完成后再生成。
+把照片作为唯一内容来源生成插画。用户未指定风格时，先推荐 2–3 个候选并等待选择；风格确定后，继续确认输出方式和文字设置，所有选择完成后再生成。
 
 ## 默认规则
 
@@ -37,6 +37,7 @@ description: Transform an uploaded or local photograph into one of seven curated
 | 单一人物、宠物、日常小物或轻松片段 | 极简拙趣手绘 / naive whimsical hand-drawn | [naive-whimsical-handdrawn.md](references/naive-whimsical-handdrawn.md) |
 | 多主体、自然环境或完整叙事场景 | 平绘绘本 / flat picture-book | [flat-picture-book.md](references/flat-picture-book.md) |
 | 主体轮廓清晰、原图色彩关系强，适合用不透明色块和刷痕概括 | 丙烯画手绘 / acrylic hand-painted | [acrylic-handpainted.md](references/acrylic-handpainted.md) |
+| 地点、建筑、物件或生活场景具有明确主视觉和地方感，适合编辑旅行海报 | 极简扁平矢量 / minimal flat-vector | [minimal-flat-vector.md](references/minimal-flat-vector.md) |
 | 重复、网格、排列、前后层级或结构关系突出 | 极简几何解构 / minimal geometric deconstruction | [minimal-geometric-deconstruction.md](references/minimal-geometric-deconstruction.md) |
 | 地标、建筑、山水或适合折面分层的轮廓 | 手工折纸风 / handcrafted origami | [handcrafted-origami.md](references/handcrafted-origami.md) |
 | 氛围、旅行记忆、方向与色彩关系重于具体轮廓 | 极简抽象诗意 / minimal abstract poetic | [minimal-abstract-poetic.md](references/minimal-abstract-poetic.md) |
@@ -113,5 +114,6 @@ Avoid: <公共禁用项 + 所选风格的负面约束>
 - [极简抽象诗意](references/minimal-abstract-poetic.md)
 - [极简拙趣手绘](references/naive-whimsical-handdrawn.md)
 - [平绘绘本](references/flat-picture-book.md)
+- [极简扁平矢量](references/minimal-flat-vector.md)
 - [极简几何解构](references/minimal-geometric-deconstruction.md)
 - [手工折纸风](references/handcrafted-origami.md)

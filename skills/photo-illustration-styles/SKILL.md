@@ -1,6 +1,6 @@
 ---
 name: photo-illustration-styles
-description: Transform an uploaded or local photograph into one of eight curated illustration styles with built-in image generation while preserving the source subjects, counts, poses, spatial relationships, and recognizable features. Support standalone illustrations or optional 3:4 vertical photo-and-illustration composites with user-selected text. Use when the user asks to turn a photo into a minimal paper hand-drawn, acrylic hand-painted, minimal abstract poetic, naive whimsical hand-drawn, flat picture-book, minimal geometric deconstruction, handcrafted origami, or asks agent to recommend two or three fitting styles before generation.
+description: Photo-to-illustration; recommend 2–3 styles if unspecified
 ---
 
 # 照片插画风格转换
@@ -34,14 +34,34 @@ description: Transform an uploaded or local photograph into one of eight curated
 
 | 照片的主导特征 | 选择风格 | 参考文件 |
 | --- | --- | --- |
-| 单一人物、宠物、日常小物或轻松片段 | 极简拙趣手绘 / naive whimsical hand-drawn | [naive-whimsical-handdrawn.md](references/naive-whimsical-handdrawn.md) |
-| 多主体、自然环境或完整叙事场景 | 平绘绘本 / flat picture-book | [flat-picture-book.md](references/flat-picture-book.md) |
+| 单一人物、宠物、日常小物或轻松片段；想要蜡笔、简笔画或稚拙粗线条 | 极简拙趣手绘 / naive whimsical hand-drawn | [naive-whimsical-handdrawn.md](references/naive-whimsical-handdrawn.md) |
+| 多主体、自然环境或完整叙事场景；需要粗线条绘本与温暖生活记录感 | 平绘绘本 / flat picture-book | [flat-picture-book.md](references/flat-picture-book.md) |
 | 主体轮廓清晰、原图色彩关系强，适合用不透明色块和刷痕概括 | 丙烯画手绘 / acrylic hand-painted | [acrylic-handpainted.md](references/acrylic-handpainted.md) |
 | 地点、建筑、物件或生活场景具有明确主视觉和地方感，适合编辑旅行海报 | 极简扁平矢量 / minimal flat-vector | [minimal-flat-vector.md](references/minimal-flat-vector.md) |
-| 重复、网格、排列、前后层级或结构关系突出 | 极简几何解构 / minimal geometric deconstruction | [minimal-geometric-deconstruction.md](references/minimal-geometric-deconstruction.md) |
+| 重复、网格、排列、前后层级或结构关系突出；适合像素块、矩形色块或复古版画 | 极简几何解构 / minimal geometric deconstruction | [minimal-geometric-deconstruction.md](references/minimal-geometric-deconstruction.md) |
 | 地标、建筑、山水或适合折面分层的轮廓 | 手工折纸风 / handcrafted origami | [handcrafted-origami.md](references/handcrafted-origami.md) |
 | 氛围、旅行记忆、方向与色彩关系重于具体轮廓 | 极简抽象诗意 / minimal abstract poetic | [minimal-abstract-poetic.md](references/minimal-abstract-poetic.md) |
 | 艺术书封、小主体大留白或无法明确归类 | 极简纸感手绘 / minimal paper hand-drawn | [minimal-paper-handdrawn.md](references/minimal-paper-handdrawn.md) |
+| 旅行地标适合缩成小型纪念章，偏好深色油墨、缺墨和版印颗粒 | 油墨印章图章 / ink stamp print | [ink-stamp-print.md](references/ink-stamp-print.md) |
+| 场景可拆成主卡片、贴纸和少量纸片，偏好手帐或旅行纪念物语汇 | 手帐拼贴与旅行纪念贴纸 / journal collage sticker | [journal-collage-sticker.md](references/journal-collage-sticker.md) |
+| 中国建筑、桥梁或水乡适合浓淡墨块、飞白和断续笔线 | 写意毛笔水墨 / expressive brush ink | [expressive-brush-ink.md](references/expressive-brush-ink.md) |
+| 城市、桥梁或基础设施的方向与光线关系突出，适合轻盈平滑渐变 | 极简渐变插画 / minimal gradient | [minimal-gradient.md](references/minimal-gradient.md) |
+| 山水、江南建筑或东方场景气质突出，适合柔和层叠的国风装饰性平面 | 极简国风山水 / minimal Chinese landscape | [minimal-chinese-landscape.md](references/minimal-chinese-landscape.md) |
+
+截图风格别名归并如下：
+
+- 粗线条绘本风 → 平绘绘本
+- 蜡笔简笔画 → 极简拙趣手绘
+- 像素化解构风 → 极简几何解构
+- 抽象矩形色块 → 极简几何解构
+- 复古几何版画 → 极简几何解构
+- 现代主义海报 → 极简扁平矢量
+- 手帐拼贴画 → 手帐拼贴与旅行纪念贴纸
+- 旅行纪念贴纸 → 手帐拼贴与旅行纪念贴纸
+- 油墨印章图章 → 油墨印章图章
+- 写意毛笔水墨 → 写意毛笔水墨
+- 极简渐变插画 → 极简渐变插画
+- 极简国风山水 → 极简国风山水
 
 使用以下格式回复推荐结果，然后等待用户选择：
 
@@ -117,3 +137,8 @@ Avoid: <公共禁用项 + 所选风格的负面约束>
 - [极简扁平矢量](references/minimal-flat-vector.md)
 - [极简几何解构](references/minimal-geometric-deconstruction.md)
 - [手工折纸风](references/handcrafted-origami.md)
+- [油墨印章图章](references/ink-stamp-print.md)
+- [手帐拼贴与旅行纪念贴纸](references/journal-collage-sticker.md)
+- [写意毛笔水墨](references/expressive-brush-ink.md)
+- [极简渐变插画](references/minimal-gradient.md)
+- [极简国风山水](references/minimal-chinese-landscape.md)

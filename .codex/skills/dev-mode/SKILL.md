@@ -1,6 +1,6 @@
 ---
 name: dev-mode
-description: Coordinate the project's eight specialized agents through planning, execution, review, debugging, and final acceptance for substantial software-development tasks. Use when a change benefits from independent discovery, a concrete plan, bounded implementation, fresh review, or a verified debugging loop. Do not use for simple questions or obvious low-risk edits where delegation costs more than it saves.
+description: Coordinate the project's seven specialized agents through planning, execution, review, debugging, and final acceptance for substantial software-development tasks. Use when a change benefits from independent discovery, a concrete plan, bounded implementation, fresh review, or a verified debugging loop. Do not use for simple questions or obvious low-risk edits where delegation costs more than it saves.
 ---
 
 # Dev Mode
@@ -23,7 +23,6 @@ Clarify the goal, constraints, success criteria, and unresolved decisions in the
 
 - Use `scout` to map relevant code, callers, tests, and change surfaces.
 - Use `researcher` only for external facts, current documentation, or specifications.
-- Use `context-builder` when several findings need a concise handoff.
 - Use `planner` to create an executable, verifiable plan when the implementation is not already decision-complete.
 - Use `oracle` only for consequential decisions, conflicting constraints, or possible decision drift.
 
@@ -58,7 +57,6 @@ Accept the task only after the main thread confirms that the requested outcome, 
 | --- | --- | --- |
 | `scout` | Focused local reconnaissance and failure tracing | Writing changes |
 | `researcher` | Primary-source external evidence | Local implementation |
-| `context-builder` | Consolidating broad evidence into a handoff | Making product decisions |
 | `planner` | Concrete, verifiable implementation plans | Editing files |
 | `worker` | Primary approved implementation and checks | Unapproved scope decisions |
 | `reviewer` | Independent diff and validation review | Applying fixes |

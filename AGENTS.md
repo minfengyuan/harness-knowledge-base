@@ -1,55 +1,24 @@
 # AGENTS.md
 
-## 1. Think Before Coding
+## Scope and judgment
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+- Infer the user's intent and act toward the requested outcome. Ask only when an unresolved choice could materially change the result, authority, or scope; otherwise make a reasonable assumption and state it when useful.
+- Keep changes minimal and directly related to the request. Do not add speculative features, abstractions, or unrelated cleanup.
+- Preserve existing APIs, behavior, project conventions, and user changes unless the request explicitly changes them.
 
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+## Context and verification
 
-## 2. Simplicity First
+- Read the files, callers, and documentation directly relevant to the change. Expand the search when dependencies, architecture, or data flow are unclear; do not read the whole repository to satisfy a ritual.
+- Choose verification that matches the change. Run relevant tests, linters, builds, or static checks when they provide meaningful evidence; do not repeat broad checks for low-risk documentation or wording changes without a project requirement.
+- Before reporting completion, inspect the final diff and report the files changed, checks run, results, and any remaining risk.
 
-**Minimum code that solves the problem. Nothing speculative.**
+## Safety and boundaries
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
+- Keep work within the user's requested scope and current workspace.
+- Do not delete data, rewrite Git history, push, deploy, modify production data, or expose credentials without explicit authorization for that action.
+- Local read-only inspection, targeted edits, and disposable local validation may proceed without step-by-step confirmation when they stay within the requested scope.
 
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+## Change hygiene
 
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
+- Match local style and touch only what is needed.
+- Remove imports, variables, functions, or references made unused by your own changes. Leave unrelated dead code alone.

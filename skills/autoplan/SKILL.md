@@ -11,7 +11,7 @@ Autoplan converts a user request into a plan that is ready to implement.
 
 It is an orchestration skill: it clarifies the request, decides whether idea-shaping is needed, drafts the implementation plan, optionally runs product and engineering review passes, and returns a final execution-ready plan.
 
-**Core principle:** do not jump from a vague request straight into implementation. First produce a plan that is narrow, explicit, and testable.
+**Core principle:** turn an ambiguous or multi-step request into a plan whose scope and acceptance checks are clear enough to execute.
 
 ## When to Use
 
@@ -28,13 +28,10 @@ Do not use this skill when:
 
 ## High-Level Flow
 
-1. Understand the user request.
-2. Determine whether the problem statement is already clear.
-3. If not clear, run `office-hours` style discovery first.
-4. Draft an initial implementation plan.
-5. If product scope or ambition is uncertain, apply `plan-ceo-review`.
-6. If engineering details or risk are uncertain, apply `plan-eng-review`.
-7. Merge the results into one final implementation plan.
+1. Understand the request and determine whether discovery is needed.
+2. Draft the smallest useful plan with scope, interfaces, checks, and assumptions.
+3. Add product or engineering review only when that uncertainty is material.
+4. Merge the useful findings into one executable plan.
 
 ## Step-by-Step Process
 
@@ -48,7 +45,7 @@ Extract:
 - implied scope
 - whether the request is product-first or implementation-first
 
-If the request is missing core problem definition, user definition, or wedge, do not draft the final plan yet.
+If a missing decision would materially change the outcome, resolve it before finalizing the plan. Do not delay a plan for details the implementer can safely infer.
 
 ### Step 2: Decide whether discovery is needed
 

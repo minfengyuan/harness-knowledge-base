@@ -24,7 +24,7 @@ Use this skill when the user asks to:
 
 Use this skill after idea shaping but before implementation when product judgment matters more than engineering detail.
 
-If the underlying user problem and wedge are still unclear, run `office-hours` first.
+If the underlying user problem and wedge are still unclear, ask targeted questions to clarify them before reviewing the plan.
 
 ## Review Modes
 
@@ -160,6 +160,6 @@ Weak findings are:
 ## Integration
 
 Typical flow:
-- use `office-hours` if the problem or wedge is still unclear
+- clarify the problem or wedge with targeted questions if either is still unclear
 - use `plan-ceo-review` to sharpen product direction
 - use `plan-eng-review` to lock engineering execution

@@ -27,3 +27,10 @@ Find enough evidence to distinguish the root cause from the symptom, then make t
 ## Completion
 
 Report the reproduction or diagnostic evidence, root cause, changed files, checks run, and any unresolved uncertainty. Use the tdd skill when the user requests test-first development or when a regression test is the clearest way to drive the fix.
+
+## Further resources
+
+- [Root-cause tracing](root-cause-tracing.md)
+- [Condition-based waiting](condition-based-waiting.md) and its [complete example](condition-based-waiting-example.ts)
+- [Defense-in-depth validation](defense-in-depth.md)
+- [Test-pollution bisection script](find-polluter.sh)

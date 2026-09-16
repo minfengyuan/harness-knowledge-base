@@ -21,3 +21,11 @@ Prefer vertical slices over writing a complete test suite before understanding t
 Use the project's vocabulary and conventions, inspect existing interfaces and tests, and preserve public behavior unless the request changes it. Confirm a product decision only when the interface or behavior is genuinely ambiguous; do not require a separate approval round for a clear task.
 
 Before claiming completion, run the relevant tests and report what behavior they cover. If the user did not request TDD and a low-risk change is adequately verified by a focused check, do not impose a full red-green workflow.
+
+## Further resources
+
+- [Good and bad tests](tests.md)
+- [Interface design for testability](interface-design.md)
+- [When to mock](mocking.md)
+- [Refactor candidates](refactoring.md)
+- [Deep modules](deep-modules.md)

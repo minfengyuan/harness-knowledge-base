@@ -54,6 +54,4 @@ During execution:
 
 ## Integration
 
-Related skills:
-- `subagent-driven-development` for execution with subagents
-- `verification-before-completion` before claiming success
+When work can be split without conflicting ownership, use independent delegates for the bounded tasks that benefit from parallel execution. Before claiming success, run the final checks justified by the change and inspect their results.

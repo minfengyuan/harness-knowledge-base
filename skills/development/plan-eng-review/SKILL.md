@@ -21,7 +21,7 @@ Use this skill when the user:
 - wants an engineering review before implementation
 - wants sharper thinking about edge cases, testing, or rollout risk
 
-If the product problem is still unclear, use `office-hours` or `plan-ceo-review` first.
+If the product problem is still unclear, clarify it with targeted questions or use `plan-ceo-review` first.
 
 ## Inputs
 
@@ -150,6 +150,6 @@ Weak findings are:
 ## Integration
 
 Typical flow:
-- use `office-hours` if the idea is still vague
+- clarify the idea with targeted questions if it is still vague
 - use `plan-ceo-review` if scope or product direction is unsettled
 - use `plan-eng-review` to make the implementation plan decision-complete

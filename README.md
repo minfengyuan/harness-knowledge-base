@@ -6,18 +6,17 @@ This repository is organized as a set of task-specific skill folders under `skil
 
 ## What's In This Repo
 
-The repository currently contains 16 skills, including:
+The repository currently contains 13 skills, organized into three groups:
 
-- planning and scope shaping: `autoplan`, `office-hours`, `plan-ceo-review`, `plan-eng-review`
-- implementation workflow: `dev-mode`, `executing-plans`, `subagent-driven-development`
-- quality and verification: `tdd`, `systematic-debugging`, `verification-before-completion`
-- documentation and formatting: `better-readme`, `conventional-commits`, `recipe-formatter`
+- development: `batch-grill-me`, `conventional-commits`, `executing-plans`, `plan-ceo-review`, `plan-eng-review`, `systematic-debugging`, `tdd`
+- productivity: `handoff`, `progressive-disclosure-agents-md`, `storm-research`
+- misc: `photo-illustration-styles`, `pi-coding-agent`, `recipe-formatter`
 
 Several skills also ship supporting materials such as:
 
-- reference docs, for example `skills/better-readme/references/readme-playbook.md`
-- review or implementation prompts, for example files in `skills/subagent-driven-development/`
-- helper artifacts, for example `skills/systematic-debugging/find-polluter.sh`
+- reference docs, for example `skills/misc/photo-illustration-styles/references/acrylic-handpainted.md`
+- helper artifacts, for example `skills/development/systematic-debugging/find-polluter.sh`
+- optional agent metadata, for example `skills/development/batch-grill-me/agents/openai.yaml`
 
 ## Installation
 
@@ -35,21 +34,19 @@ Install skills as symlinks from this repository's `skills/` directory. Before in
 
 Then show the available skills and ask which ones to install. Install all skills by default when the user does not make a selection:
 
-- `autoplan`
+- `batch-grill-me`
 - `conventional-commits`
 - `executing-plans`
-- `grilling`
 - `handoff`
-- `office-hours`
 - `pi-coding-agent`
 - `plan-ceo-review`
 - `plan-eng-review`
+- `photo-illustration-styles`
 - `progressive-disclosure-agents-md`
 - `recipe-formatter`
-- `subagent-driven-development`
 - `systematic-debugging`
+- `storm-research`
 - `tdd`
-- `verification-before-completion`
 
 ## Repository Structure
 
@@ -59,12 +56,17 @@ Then show the available skills and ask which ones to install. Install all skills
   skills/
     dev-mode/          # bundled Codex skill
 skills/
-  <skill-name>/
-    SKILL.md
-    references/        # optional supporting docs
-    prompts/           # optional workflow prompts
-    scripts/           # optional helpers or examples
-    metadata.json      # optional skill metadata
+  development/
+    <skill-name>/
+      SKILL.md
+  productivity/
+    <skill-name>/
+      SKILL.md
+  misc/
+    <skill-name>/
+      SKILL.md
+      references/      # optional supporting docs
+      agents/          # optional agent metadata
 AGENTS.md
 LICENSE
 README.md

@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { stripVTControlCharacters } from "node:util";
 import {
   adapterPaths,
   adapterProblems,
@@ -24,7 +25,8 @@ async function successful(args, options) {
 
 test("skills@1.7.0 discovers all 15 repository skills", async () => {
   const result = await successful(["add", repositoryRoot, "--list"], { cwd: repositoryRoot });
-  assert.match(result.stdout + result.stderr, /Found 15 skills/);
+  const output = stripVTControlCharacters(result.stdout + result.stderr);
+  assert.match(output, /Found 15 skills/);
 });
 
 test("fixed upstream CLI and adapter complete project and global lifecycles", async (t) => {

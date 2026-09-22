@@ -1,0 +1,39 @@
+{
+  "name": "@minfengyuan/harness-knowledge-base",
+  "version": "0.1.0",
+  "description": "Installer for the Harness Knowledge Base skill collection",
+  "type": "module",
+  "bin": {
+    "hkb": "./installer/cli.mjs"
+  },
+  "files": [
+    "installer/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "catalog": "node scripts/generate-catalog.mjs",
+    "catalog:check": "node scripts/generate-catalog.mjs --check",
+    "test": "node --test",
+    "check": "npm run catalog:check && npm test && npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minfengyuan/harness-knowledge-base.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^1.8.1",
+    "skills": "1.7.0"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.1"
+  }
+}

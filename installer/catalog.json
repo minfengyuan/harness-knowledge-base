@@ -1,0 +1,84 @@
+[
+  {
+    "name": "batch-grill-me",
+    "description": "Batch material design decisions into focused rounds when the user explicitly wants an exhaustive planning interview.",
+    "path": "skills/development/batch-grill-me"
+  },
+  {
+    "name": "conventional-commits",
+    "description": "Generate Conventional Commits 1.0.0 messages from staged git changes. Use when asked to create a commit message from a staged diff.",
+    "path": "skills/development/conventional-commits"
+  },
+  {
+    "name": "dev-mode",
+    "description": "Coordinate the project's seven specialized agents through planning, execution, review, debugging, and final acceptance for substantial software-development tasks. Use when a change benefits from independent discovery, a concrete plan, bounded implementation, fresh review, or a verified debugging loop. Do not use for simple questions or obvious low-risk edits where delegation costs more than it saves.",
+    "path": ".codex/skills/dev-mode",
+    "agents": [
+      "codex"
+    ],
+    "adapter": "codex-subagents"
+  },
+  {
+    "name": "executing-plans",
+    "description": "Use when you have a written implementation plan to execute and want a disciplined flow with review checkpoints",
+    "path": "skills/development/executing-plans"
+  },
+  {
+    "name": "handoff",
+    "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+    "path": "skills/productivity/handoff"
+  },
+  {
+    "name": "optimize-astra-instructions",
+    "description": "Audit or revise Skills, AGENTS.md files, and agent task prompts specifically for GPT-6 Astra. Use when modernizing Astra instructions or diagnosing Astra context bloat, conflicts, overconstraint, or premature stopping.",
+    "path": ".codex/skills/optimize-astra-instructions",
+    "agents": [
+      "codex"
+    ]
+  },
+  {
+    "name": "photo-illustration-styles",
+    "description": "Photo-to-illustration; recommend 2–3 styles if unspecified",
+    "path": "skills/misc/photo-illustration-styles"
+  },
+  {
+    "name": "pi-coding-agent",
+    "description": "Guides agents using Pi coding-agent: install, authenticate, run, configure, automate, and extend the pi CLI. Use for interactive, print, JSON, RPC, or SDK workflows; providers, models, settings, resources, sessions, compaction, extensions, packages, and Pi security.",
+    "path": "skills/misc/pi-coding-agent"
+  },
+  {
+    "name": "plan-ceo-review",
+    "description": "Use when a user wants product-level review of a plan, especially to challenge scope, ambition, and user value before implementation",
+    "path": "skills/development/plan-ceo-review"
+  },
+  {
+    "name": "plan-eng-review",
+    "description": "Use proactively when a written plan needs engineering review for architecture, data flow, testing, edge cases, performance, and operational safety before implementation",
+    "path": "skills/development/plan-eng-review"
+  },
+  {
+    "name": "progressive-disclosure-agents-md",
+    "description": "Design, review, or create progressive-disclosure and layered AGENTS.md instruction systems for agentic coding workflows. Use when Codex needs to organize root and nested AGENTS.md files, route context by directory or task, split always-needed guidance from conditional docs, audit agent instructions for context bloat or conflicts, or help with AGENTS.md, agent instructions, progressive disclosure, layered instructions, 分层 AGENTS.md, 渐进式披露, or 多层代理说明.",
+    "path": "skills/productivity/progressive-disclosure-agents-md"
+  },
+  {
+    "name": "recipe-formatter",
+    "description": "将菜谱或菜名文字整理为结构化菜谱，自动分类并打标签，保存到 Obsidian vault。Use when the user provides a dish name, recipe text, or cooking description and wants it formatted into a structured recipe with category tags. Triggers on: recipe formatting, 菜谱, 做法, 食谱, 怎么做, how to cook.",
+    "path": "skills/misc/recipe-formatter"
+  },
+  {
+    "name": "storm-research",
+    "description": "Conduct source-backed, multi-angle research for complex questions; do not use for simple factual lookups.",
+    "path": "skills/productivity/storm-research"
+  },
+  {
+    "name": "systematic-debugging",
+    "description": "Use when a bug, test failure, or unexpected behavior needs evidence-based diagnosis before a fix.",
+    "path": "skills/development/systematic-debugging"
+  },
+  {
+    "name": "tdd",
+    "description": "Use when the user requests test-driven development, red-green-refactor, integration tests, or a test-first bug fix.",
+    "path": "skills/development/tdd"
+  }
+]

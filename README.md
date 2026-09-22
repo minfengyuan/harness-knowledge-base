@@ -1,89 +1,94 @@
 # Harness Knowledge Base
 
-A small, opinionated knowledge base of reusable AI agent skills for planning, implementation, debugging, review, and documentation workflows.
+A small, opinionated collection of reusable agent skills for planning, implementation, debugging, review, research, and documentation workflows.
 
-This repository is organized as a set of task-specific skill folders under `skills/`. Each skill is defined primarily by a `SKILL.md` file, and some skills include supporting references, prompts, or helper scripts.
-
-## What's In This Repo
-
-The repository currently contains 13 skills, organized into three groups:
-
-- development: `batch-grill-me`, `conventional-commits`, `executing-plans`, `plan-ceo-review`, `plan-eng-review`, `systematic-debugging`, `tdd`
-- productivity: `handoff`, `progressive-disclosure-agents-md`, `storm-research`
-- misc: `photo-illustration-styles`, `pi-coding-agent`, `recipe-formatter`
-
-Several skills also ship supporting materials such as:
-
-- reference docs, for example `skills/misc/photo-illustration-styles/references/acrylic-handpainted.md`
-- helper artifacts, for example `skills/development/systematic-debugging/find-polluter.sh`
-- optional agent metadata, for example `skills/development/batch-grill-me/agents/openai.yaml`
+The repository contains 15 skills: 13 general skills under `skills/` and two Codex skills under `.codex/skills/`. The nested layout is supported by the official `skills` CLI and does not need to be flattened.
 
 ## Installation
 
-### For Humans
+The standard installer can discover and install every skill:
 
-Fetch the installation guide and follow it:
-
-```text
-https://raw.githubusercontent.com/minfengyuan/harness-knowledge-base/refs/heads/main/README.md
+```sh
+npx skills add minfengyuan/harness-knowledge-base
 ```
 
-### For LLM Agents
+That command does not install the seven Codex custom-agent configurations bundled with `dev-mode`. For a complete `dev-mode` installation, use the HKB wrapper:
 
-Install skills as symlinks from this repository's `skills/` directory. Before installing, ask the user whether to place the symlinks in the agent's global skills directory or the skills directory at the current project root.
+```sh
+npx --package @minfengyuan/harness-knowledge-base hkb add
+```
 
-Then show the available skills and ask which ones to install. Install all skills by default when the user does not make a selection:
+The wrapper delegates skill installation and updates to the pinned official `skills` CLI, then creates the additional Codex subagent links when required. It does not maintain a separate skill updater.
 
-- `batch-grill-me`
-- `conventional-commits`
-- `executing-plans`
-- `handoff`
-- `pi-coding-agent`
-- `plan-ceo-review`
-- `plan-eng-review`
-- `photo-illustration-styles`
-- `progressive-disclosure-agents-md`
-- `recipe-formatter`
-- `systematic-debugging`
-- `storm-research`
-- `tdd`
+For non-interactive use, explicitly provide the scope, every skill, and every agent:
+
+```sh
+npx --package @minfengyuan/harness-knowledge-base hkb add \
+  --project --skill dev-mode --agent codex --yes
+```
+
+Selecting `dev-mode` or `optimize-astra-instructions` makes the complete selection Codex-only. An explicitly incompatible agent is rejected before installation begins.
+
+## HKB Commands
+
+| Command | Purpose |
+| --- | --- |
+| `hkb add` | Select skills, install them with `skills add`, and run required adapters |
+| `hkb update` | Run `skills update`, then synchronize Codex subagent links |
+| `hkb remove` | Remove HKB-owned links, then remove skills; restore links if removal fails |
+| `hkb sync` | Check and repair links for an installed `dev-mode` skill |
+| `hkb list` | Show catalog compatibility, installation state, and adapter health |
+| `hkb doctor` | Read-only adapter diagnostics; exits nonzero for missing, stale, dangling, or conflicting links |
+
+Running `hkb` without a command is equivalent to `hkb add`. Common options are repeatable `--skill` and `--agent`, mutually exclusive `--project` and `--global`, plus `--yes` and `--force`. `list` and `doctor` also accept `--json`.
+
+The adapter uses relative file symlinks. It never falls back to copying files. On Windows, enable Developer Mode or run in a terminal that has permission to create symlinks. Global installation respects `CODEX_HOME`; project installation writes agent links under `<project>/.codex/agents/`.
+
+## Included Skills
+
+- Development: `batch-grill-me`, `conventional-commits`, `executing-plans`, `plan-ceo-review`, `plan-eng-review`, `systematic-debugging`, `tdd`
+- Productivity: `handoff`, `progressive-disclosure-agents-md`, `storm-research`
+- Miscellaneous: `photo-illustration-styles`, `pi-coding-agent`, `recipe-formatter`
+- Codex: `dev-mode`, `optimize-astra-instructions`
 
 ## Repository Structure
 
 ```text
 .codex/
-  agents/              # Codex agent configuration
   skills/
-    dev-mode/          # bundled Codex skill
+    dev-mode/
+      SKILL.md
+      agents/          # source of seven Codex custom-agent TOML files
+    optimize-astra-instructions/
 skills/
   development/
-    <skill-name>/
-      SKILL.md
   productivity/
-    <skill-name>/
-      SKILL.md
   misc/
-    <skill-name>/
-      SKILL.md
-      references/      # optional supporting docs
-      agents/          # optional agent metadata
+installer/             # hkb CLI, upstream bridge, catalog, and Codex adapter
+scripts/
+  generate-catalog.mjs
+test/
 AGENTS.md
 LICENSE
-README.md
+package.json
 ```
 
-Each skill directory is self-contained. `SKILL.md` explains when to use the skill, its workflow, and the expected output. Supporting files can add references, prompts, scripts, examples, or metadata where needed.
+The npm tarball contains only the installer, README, LICENSE, and package metadata. Skills remain sourced from the default branch of `minfengyuan/harness-knowledge-base`, preserving the official `skills update` lifecycle.
 
-## Contributing
+## Development
 
-This repository does not currently include a separate `CONTRIBUTING.md`.
+Requires Node.js 22.20.0 or newer.
 
-If you add or revise a skill, keep the format consistent with the existing collection:
+```sh
+npm ci
+npm run catalog:check
+npm test
+npm pack --dry-run
+```
 
-- put the skill in its own directory under `skills/`
-- define the workflow in `SKILL.md`
-- add references or helper assets only when they materially improve execution
-- keep instructions concrete, testable, and free of template filler
+`installer/catalog.json` is generated from every `skills/**/SKILL.md` and `.codex/skills/**/SKILL.md`. Run `npm run catalog` after adding, removing, renaming, or changing the frontmatter of a skill. CI rejects catalog drift.
+
+Publishing is triggered by a GitHub Release tag matching `v<package.json version>`. Before the first release, configure npm Trusted Publishing for this repository and the publish workflow.
 
 ## Recommended Projects
 
@@ -93,10 +98,7 @@ If you add or revise a skill, keep the format consistent with the existing colle
 
 ## Thanks
 
-This repository was influenced by and learned from a few strong open-source examples and workflows:
-
-- [obra/superpowers](https://github.com/obra/superpowers)
-- [garrytan/gstack](https://github.com/garrytan/gstack)
+This repository was influenced by [obra/superpowers](https://github.com/obra/superpowers) and [garrytan/gstack](https://github.com/garrytan/gstack).
 
 ## License
 

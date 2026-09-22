@@ -53,11 +53,16 @@ export function serializeCatalog(catalog) {
   return `${JSON.stringify(catalog, null, 2)}\n`;
 }
 
+export function isCatalogCurrent(current, generated) {
+  const normalizeEol = (value) => value.replaceAll("\r\n", "\n");
+  return normalizeEol(current) === normalizeEol(generated);
+}
+
 async function main() {
   const generated = serializeCatalog(await generateCatalog());
   if (process.argv.includes("--check")) {
     const current = await readFile(outputPath, "utf8").catch(() => "");
-    if (current !== generated) {
+    if (!isCatalogCurrent(current, generated)) {
       console.error("installer/catalog.json is stale; run npm run catalog");
       process.exitCode = 1;
     }

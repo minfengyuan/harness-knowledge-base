@@ -1,105 +1,75 @@
 # Harness Knowledge Base
 
-A small, opinionated collection of reusable agent skills for planning, implementation, debugging, review, research, and documentation workflows.
+A small, opinionated collection of reusable agent skills for engineering, research, documentation, and everyday agent workflows.
 
-The repository contains 15 skills: 13 general skills under `skills/` and two Codex skills under `.codex/skills/`. The nested layout is supported by the official `skills` CLI and does not need to be flattened.
+Most skills work with any agent supported by the [skills CLI](https://github.com/vercel-labs/skills). Codex-specific skills live under `.codex/skills/` and may include additional Codex agent configuration.
 
-## Installation
+## Install
 
-The standard installer can discover and install every skill:
+For most agents:
 
 ```sh
 npx skills add minfengyuan/harness-knowledge-base
 ```
 
-That command does not install the seven Codex custom-agent configurations bundled with `dev-mode`. For a complete `dev-mode` installation, use the HKB wrapper:
+For Codex `dev-mode`, use the HKB installer so its custom agents are wired up as well:
 
 ```sh
 npx --package @minfengyuan/harness-knowledge-base hkb add
 ```
 
-The wrapper delegates skill installation and updates to the pinned official `skills` CLI, then creates the additional Codex subagent links when required. It does not maintain a separate skill updater.
-
-For non-interactive use, explicitly provide the scope, every skill, and every agent:
+For non-interactive project installation:
 
 ```sh
 npx --package @minfengyuan/harness-knowledge-base hkb add \
   --project --skill dev-mode --agent codex --yes
 ```
 
-Selecting `dev-mode` or `optimize-astra-instructions` makes the complete selection Codex-only. An explicitly incompatible agent is rejected before installation begins.
+The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. Run `hkb --help` for options.
 
-## HKB Commands
+> [!NOTE]
+> `dev-mode` uses symlinks for Codex subagents. On Windows, enable Developer Mode or otherwise allow symlink creation. The HKB wrapper requires Node.js 22.20.0 or newer.
 
-| Command | Purpose |
-| --- | --- |
-| `hkb add` | Select skills, install them with `skills add`, and run required adapters |
-| `hkb update` | Run `skills update`, then synchronize Codex subagent links |
-| `hkb remove` | Remove HKB-owned links, then remove skills; restore links if removal fails |
-| `hkb sync` | Check and repair links for an installed `dev-mode` skill |
-| `hkb list` | Show catalog compatibility, installation state, and adapter health |
-| `hkb doctor` | Read-only adapter diagnostics; exits nonzero for missing, stale, dangling, or conflicting links |
+## Skills
 
-Running `hkb` without a command is equivalent to `hkb add`. Common options are repeatable `--skill` and `--agent`, mutually exclusive `--project` and `--global`, plus `--yes` and `--force`. `list` and `doctor` also accept `--json`.
+### Development
 
-The adapter uses relative file symlinks. It never falls back to copying files. On Windows, enable Developer Mode or run in a terminal that has permission to create symlinks. Global installation respects `CODEX_HOME`; project installation writes agent links under `<project>/.codex/agents/`.
+- [`batch-grill-me`](skills/development/batch-grill-me)
+- [`conventional-commits`](skills/development/conventional-commits)
+- [`executing-plans`](skills/development/executing-plans)
+- [`plan-ceo-review`](skills/development/plan-ceo-review)
+- [`plan-eng-review`](skills/development/plan-eng-review)
+- [`systematic-debugging`](skills/development/systematic-debugging)
+- [`tdd`](skills/development/tdd)
 
-## Included Skills
+### Productivity
 
-- Development: `batch-grill-me`, `conventional-commits`, `executing-plans`, `plan-ceo-review`, `plan-eng-review`, `systematic-debugging`, `tdd`
-- Productivity: `handoff`, `progressive-disclosure-agents-md`, `storm-research`
-- Miscellaneous: `photo-illustration-styles`, `pi-coding-agent`, `recipe-formatter`
-- Codex: `dev-mode`, `optimize-astra-instructions`
+- [`handoff`](skills/productivity/handoff)
+- [`progressive-disclosure-agents-md`](skills/productivity/progressive-disclosure-agents-md)
+- [`storm-research`](skills/productivity/storm-research)
 
-## Repository Structure
+### Miscellaneous
 
-```text
-.codex/
-  skills/
-    dev-mode/
-      SKILL.md
-      agents/          # source of seven Codex custom-agent TOML files
-    optimize-astra-instructions/
-skills/
-  development/
-  productivity/
-  misc/
-installer/             # hkb CLI, upstream bridge, catalog, and Codex adapter
-scripts/
-  generate-catalog.mjs
-test/
-AGENTS.md
-LICENSE
-package.json
-```
+- [`photo-illustration-styles`](skills/misc/photo-illustration-styles)
+- [`pi-coding-agent`](skills/misc/pi-coding-agent)
+- [`recipe-formatter`](skills/misc/recipe-formatter)
 
-The npm tarball contains only the installer, README, LICENSE, and package metadata. Skills remain sourced from the default branch of `minfengyuan/harness-knowledge-base`, preserving the official `skills update` lifecycle.
+### Codex
+
+- [`dev-mode`](.codex/skills/dev-mode) — coordinates seven specialized Codex subagents
+- [`optimize-astra-instructions`](.codex/skills/optimize-astra-instructions) — audits and revises instructions for GPT-6 Astra
 
 ## Development
 
-Requires Node.js 22.20.0 or newer.
-
 ```sh
 npm ci
-npm run catalog:check
-npm test
-npm pack --dry-run
+npm run check
 ```
 
-`installer/catalog.json` is generated from every `skills/**/SKILL.md` and `.codex/skills/**/SKILL.md`. Run `npm run catalog` after adding, removing, renaming, or changing the frontmatter of a skill. CI rejects catalog drift.
+## Acknowledgements
 
-Publishing is triggered by a GitHub Release tag matching `v<package.json version>`. Before the first release, configure npm Trusted Publishing for this repository and the publish workflow.
-
-## Recommended Projects
-
-- [mattpocock/skills](https://github.com/mattpocock/skills)
-- [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph)
-- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
-
-## Thanks
-
-This repository was influenced by [obra/superpowers](https://github.com/obra/superpowers) and [garrytan/gstack](https://github.com/garrytan/gstack).
+Inspired by [obra/superpowers](https://github.com/obra/superpowers) and [garrytan/gstack](https://github.com/garrytan/gstack).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+[MIT](LICENSE)

@@ -18,10 +18,10 @@ Use this skill as a routing layer for Pi coding-agent tasks. Do not load every r
 
 1. **Classify the request**: daily CLI use, configuration, resources, sessions, automation, extension development, UI development, security, or platform setup.
 2. **Read one focused reference** from `references/` before making version-sensitive claims.
-3. **Inspect the environment** when acting rather than explaining: run `pwd`, `pi --version`, and `pi --help` as needed; check the project `AGENTS.md` before changing files.
+3. **Inspect only the environment needed for the action**: check `pwd`, `pi --version`, `pi --help`, project `AGENTS.md`, or related files when they can change the result. Do not run an environment checklist for explanation-only or narrowly scoped tasks.
 4. **Choose the smallest interface**: use the CLI for normal work, JSON for an event stream, RPC for a process/client boundary, and the SDK for in-process Node.js integration.
-5. **Act with explicit scope**: state the cwd, selected model/provider, session behavior, and whether project-local resources are trusted when those affect the result.
-6. **Verify**: run the requested checks, confirm the relevant Pi command/configuration, and report failures without exposing credentials.
+5. **Act with explicit scope**: make cwd, provider/model, session behavior, and project trust explicit only when they affect correctness or safety.
+6. **Verify the behavior changed or configured by the task** and report failures without exposing credentials. Broaden verification only when the change or new evidence justifies it.
 
 ## Fast task router
 
@@ -54,11 +54,11 @@ Use this skill as a routing layer for Pi coding-agent tasks. Do not load every r
 
 - Never print, paste, or commit API keys, OAuth tokens, `auth.json`, or secret environment values.
 - Do not treat a trusted project, a skill, or a package as safe merely because Pi loaded it.
-- For untrusted repositories, generated code that will run unattended, or destructive automation, recommend a container, VM, micro-VM, or policy-controlled sandbox and mount only required paths/credentials.
+- For untrusted repositories, generated code that will run unattended, or destructive automation, recommend a container, VM, micro-VM, or policy-controlled sandbox and mount only required paths or credentials.
 - Do not invent a Pi API or configuration field. Read the focused reference or the matching file in `references/upstream/`.
 - Do not use RPC built-in TUI commands as if they were protocol commands; RPC clients must consume JSONL responses/events and handle `streamingBehavior` while a run is active.
 - Do not load `references/upstream/` wholesale. It is a version-pinned fallback reference, not default context.
 
-## Completion checklist
+## Completion
 
-Before claiming a Pi task is complete, verify the requested mode starts, the selected provider/model is available, resource paths are correct, project trust behavior is intentional, and session/automation output matches the chosen interface. For extension or SDK work, run the relevant TypeScript/tests and read the exact upstream reference for the API being used.
+Before claiming completion, verify the parts of Pi behavior the request actually changed or depends on. For extension or SDK work, run the relevant TypeScript/tests and read the exact upstream reference for the API being used. Do not require unrelated provider, session, trust, or interface checks for a task that does not touch them.

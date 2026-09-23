@@ -1,4 +1,4 @@
 interface:
   display_name: "Astra Instruction Optimizer"
   short_description: "Optimize instructions specifically for GPT-6 Astra"
-  default_prompt: "Use $optimize-astra-instructions to audit and improve these Skills, AGENTS.md files, or task prompts for GPT-6 Astra."
+  default_prompt: "Use $optimize-astra-instructions to audit these Skills, AGENTS.md files, or task prompts for GPT-6 Astra and improve follow-through, instruction precedence, delegation, verification, and context efficiency."

@@ -30,7 +30,7 @@
   },
   {
     "name": "optimize-astra-instructions",
-    "description": "Audit or revise Skills, AGENTS.md files, and agent task prompts specifically for GPT-6 Astra. Use when modernizing Astra instructions or diagnosing Astra context bloat, conflicts, overconstraint, or premature stopping.",
+    "description": "Audit or revise Skills, AGENTS.md files, and agent task prompts specifically for GPT-6 Astra. Use when modernizing Astra instructions or diagnosing Astra context bloat, conflicts, overconstraint, unnecessary pauses, weak follow-through, or verification rituals.",
     "path": ".codex/skills/optimize-astra-instructions",
     "agents": [
       "codex"
@@ -38,7 +38,7 @@
   },
   {
     "name": "photo-illustration-styles",
-    "description": "Photo-to-illustration; recommend 2–3 styles if unspecified",
+    "description": "Photo-to-illustration style transfer. Use when the user wants an uploaded photo transformed into a curated illustration style; recommend 2–3 suitable styles when none is specified.",
     "path": "skills/misc/photo-illustration-styles"
   },
   {
@@ -63,7 +63,7 @@
   },
   {
     "name": "recipe-formatter",
-    "description": "将菜谱或菜名文字整理为结构化菜谱，自动分类并打标签，保存到 Obsidian vault。Use when the user provides a dish name, recipe text, or cooking description and wants it formatted into a structured recipe with category tags. Triggers on: recipe formatting, 菜谱, 做法, 食谱, 怎么做, how to cook.",
+    "description": "将用户提供的菜谱文字或明确要求保存的菜谱整理为结构化 Obsidian 菜谱，自动分类并打标签。Use when the user wants recipe text formatted, normalized, tagged, or saved as a recipe note. Do not trigger merely because the user asks how to cook a dish unless they also want recipe-note formatting or saving.",
     "path": "skills/misc/recipe-formatter"
   },
   {

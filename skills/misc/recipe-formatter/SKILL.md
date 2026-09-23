@@ -1,11 +1,11 @@
 ---
 name: recipe-formatter
-description: "将菜谱或菜名文字整理为结构化菜谱，自动分类并打标签，保存到 Obsidian vault。Use when the user provides a dish name, recipe text, or cooking description and wants it formatted into a structured recipe with category tags. Triggers on: recipe formatting, 菜谱, 做法, 食谱, 怎么做, how to cook."
+description: "将用户提供的菜谱文字或明确要求保存的菜谱整理为结构化 Obsidian 菜谱，自动分类并打标签。Use when the user wants recipe text formatted, normalized, tagged, or saved as a recipe note. Do not trigger merely because the user asks how to cook a dish unless they also want recipe-note formatting or saving."
 ---
 
 # Recipe Formatter（菜谱格式化）
 
-将用户输入的菜名或菜谱描述整理为标准格式，并自动分类打标签，保存到 Obsidian vault。
+将用户提供的菜名或菜谱描述整理为标准格式，并在用户要求保存时写入 Obsidian vault。
 
 ## 依赖技能
 
@@ -16,27 +16,20 @@ description: "将菜谱或菜名文字整理为结构化菜谱，自动分类并
 
 菜谱保存到 Obsidian vault 路径：
 
-```
-/Users/marvin/Library/Mobile Documents/iCloud~md~obsidian/Documents/DigitalGarden/02-Kitchen/
-```
+`/Users/marvin/Library/Mobile Documents/iCloud~md~obsidian/Documents/DigitalGarden/02-Kitchen/`
 
-对应 vault 内相对路径：`02-Kitchen/{菜名}.md`
+对应 vault 内相对路径：`02-Kitchen/{菜名}.md`。
 
 ## 工作流程
 
-1. 读取 `references/categories.md` 获取完整分类体系
-2. 根据输入判断烹饪方式和菜品类型，选取对应标签
-3. 按下方模板组装 Obsidian Flavored Markdown 内容（含 frontmatter）
-4. 使用 `obsidian-cli` 创建笔记：
-   ```bash
-   obsidian-cli create -v DigitalGarden -c '{完整 markdown 内容}' "02-Kitchen/{菜名}"
-   ```
-   - 文件已存在时加 `-o` 覆盖
-5. 在聊天中回复格式化后的菜谱摘要，确认已保存
+1. 读取 `references/categories.md` 获取分类体系。
+2. 根据输入判断烹饪方式和菜品类型，选取对应标签。
+3. 按下方模板组装 Obsidian Flavored Markdown 内容。
+4. 如果用户要求保存，使用 Obsidian CLI 创建笔记。
+5. 如果目标文件已存在，先保留现有文件；只有用户明确要求更新或覆盖该菜谱时才使用覆盖选项。
+6. 在聊天中返回格式化结果或摘要；执行保存时同时报告保存结果。
 
 ## 输出模板
-
-遵循 obsidian-markdown 技能规范，使用 frontmatter properties 和 Obsidian 标签语法：
 
 ```markdown
 ---
@@ -69,10 +62,9 @@ created: {YYYY-MM-DD}
 
 ## 规则
 
-- 标签从 `references/categories.md` 中选取，至少一个烹饪方式 + 一个菜品类型
-- frontmatter `tags` 始终包含 `菜谱` 基础标签，再加烹饪方式和菜品类型标签（不带 `#` 前缀）
-- 用量尽量给出（克/毫升/个/适量），信息不足时标"适量"
-- 步骤用简洁动词开头（热锅、下入、翻炒、焖煮…）
-- 如果用户只给了菜名，根据常见做法补全食材和步骤
-- 如果用户给了详细描述，提取并整理，不随意增删内容
-- 文件已存在时加 `-o` 标志覆盖
+- 标签从 `references/categories.md` 中选取，至少一个烹饪方式 + 一个菜品类型。
+- frontmatter `tags` 始终包含 `菜谱` 基础标签，再加烹饪方式和菜品类型标签，不带 `#` 前缀。
+- 用量尽量从用户输入保留；信息不足时可标“适量”。只有用户仅给菜名且明确要求补全菜谱时，才根据常见做法补全缺失食材和步骤。
+- 用户给出详细描述时以提取和整理为主，不随意改变内容。
+- 步骤用简洁动词开头。
+- 创建新笔记时不要静默覆盖同名文件。覆盖属于单独的写入决策，必须来自用户明确要求。

@@ -1,6 +1,6 @@
 interface:
   display_name: "Dev Mode"
   short_description: "Coordinate focused development agents"
-  default_prompt: "Use $dev-mode to coordinate this development task with the smallest useful set of specialized agents."
+  default_prompt: "Use $dev-mode to coordinate this development task with the smallest useful set of specialized agents and carry it through to a verified result."
 policy:
   allow_implicit_invocation: false

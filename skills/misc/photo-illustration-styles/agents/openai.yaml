@@ -1,4 +1,4 @@
 interface:
   display_name: "Photo Illustration Style Transfer"
-  short_description: "Recommend and transform uploaded photos into eight curated minimalist, hand-drawn, vector, and paper-craft illustration styles"
+  short_description: "Recommend and transform uploaded photos into curated illustration styles"
   default_prompt: "Use $photo-illustration-styles to analyze my uploaded photo and recommend 2–3 suitable illustration styles."

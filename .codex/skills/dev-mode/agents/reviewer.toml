@@ -1,7 +1,7 @@
 name = "reviewer"
 description = "Evidence-based reviewer for diffs, plans, proposed solutions, codebase health, and PR or issue validation."
-model = "gpt-6-astra"
-model_reasoning_effort = "high"
+model = "gpt-6-sol"
+model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
 
 developer_instructions = """

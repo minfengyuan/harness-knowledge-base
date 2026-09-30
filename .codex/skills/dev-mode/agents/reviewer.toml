@@ -1,6 +1,6 @@
 name = "reviewer"
 description = "Evidence-based reviewer for diffs, plans, proposed solutions, codebase health, and PR or issue validation."
-model = "gpt-6-sol"
+model = "gpt-6.1-sol"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
 

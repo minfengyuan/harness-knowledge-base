@@ -28,7 +28,7 @@ npx --package @minfengyuan/harness-knowledge-base hkb add \
 The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. Run `hkb --help` for options.
 
 > [!NOTE]
-> `dev-mode` uses symlinks for Codex subagents. On Windows, enable Developer Mode or otherwise allow symlink creation. The HKB wrapper requires Node.js 22.20.0 or newer.
+> `dev-mode` copies its Codex subagent files into `.codex/agents/` (or `$CODEX_HOME/agents/` for global installs); no symlinks are created. Run `hkb sync` after updating to refresh the copies; existing symlinks from older HKB versions are replaced with copies. The HKB wrapper requires Node.js 22.20.0 or newer.
 
 ## Skills
 

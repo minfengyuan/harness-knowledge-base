@@ -8,6 +8,7 @@ import {
   adapterProblems,
   inspectCodexAgents,
   listCanonicalAgents,
+  MANIFEST_NAME,
   removeOwnedLinks,
   restoreOwnedLinks,
   snapshotOwnedLinks,
@@ -25,19 +26,61 @@ async function fixture(t, names = ["delegate.toml", "worker.toml"]) {
   return { root, sourceDir, targetDir };
 }
 
-test("creates relative links and repeated sync is idempotent", async (t) => {
+test("copies agent files instead of linking and repeated sync is idempotent", async (t) => {
   const paths = await fixture(t);
   const first = await syncCodexAgents(paths);
   assert.equal(first.created.length, 2);
-  const link = await fs.readlink(path.join(paths.targetDir, "delegate.toml"));
-  assert.equal(path.isAbsolute(link), false);
-  assert.equal(path.resolve(paths.targetDir, link), path.join(paths.sourceDir, "delegate.toml"));
+  const target = path.join(paths.targetDir, "delegate.toml");
+  const stat = await fs.lstat(target);
+  assert.equal(stat.isSymbolicLink(), false);
+  assert.equal(stat.isFile(), true);
+  assert.equal(await fs.readFile(target, "utf8"), "delegate.toml");
   const second = await syncCodexAgents(paths);
   assert.equal(second.created.length, 0);
   assert.equal(second.unchanged.length, 2);
 });
 
-test("removes stale owned links and reports dangling links when the skill is gone", async (t) => {
+test("refreshes outdated copies after the canonical skill changes", async (t) => {
+  const paths = await fixture(t, ["worker.toml"]);
+  await syncCodexAgents(paths);
+  await fs.writeFile(path.join(paths.sourceDir, "worker.toml"), "worker v2");
+  const report = await inspectCodexAgents(paths);
+  assert.deepEqual(adapterProblems(report).map((problem) => problem.problem), ["outdated"]);
+  const synced = await syncCodexAgents(paths);
+  assert.equal(synced.created.length, 1);
+  assert.equal(await fs.readFile(path.join(paths.targetDir, "worker.toml"), "utf8"), "worker v2");
+  assert.deepEqual(adapterProblems(await inspectCodexAgents(paths)), []);
+});
+
+test("does not overwrite locally edited copies without force", async (t) => {
+  const paths = await fixture(t, ["worker.toml"]);
+  await syncCodexAgents(paths);
+  const target = path.join(paths.targetDir, "worker.toml");
+  await fs.writeFile(target, "edited by user");
+  await assert.rejects(syncCodexAgents(paths), /file conflict/);
+  assert.equal(await fs.readFile(target, "utf8"), "edited by user");
+  await syncCodexAgents({ ...paths, force: true });
+  assert.equal(await fs.readFile(target, "utf8"), "worker.toml");
+});
+
+test("replaces legacy HKB symlinks with copies", async (t) => {
+  const paths = await fixture(t, ["worker.toml", "retired.toml"]);
+  await fs.mkdir(paths.targetDir, { recursive: true });
+  for (const name of ["worker.toml", "retired.toml"]) {
+    await fs.symlink(path.relative(paths.targetDir, path.join(paths.sourceDir, name)), path.join(paths.targetDir, name));
+  }
+  await fs.rm(path.join(paths.sourceDir, "retired.toml"));
+  const report = await inspectCodexAgents(paths);
+  assert.deepEqual(adapterProblems(report).map((problem) => problem.problem), ["stale", "legacy-link"]);
+  const synced = await syncCodexAgents(paths);
+  assert.deepEqual(synced.removed.map((item) => path.basename(item)), ["retired.toml"]);
+  const target = path.join(paths.targetDir, "worker.toml");
+  assert.equal((await fs.lstat(target)).isSymbolicLink(), false);
+  assert.equal(await fs.readFile(target, "utf8"), "worker.toml");
+  await assert.rejects(fs.lstat(path.join(paths.targetDir, "retired.toml")), { code: "ENOENT" });
+});
+
+test("removes stale owned copies and reports dangling links when the skill is gone", async (t) => {
   const paths = await fixture(t);
   await syncCodexAgents(paths);
   await fs.rm(path.join(paths.sourceDir, "worker.toml"));
@@ -55,10 +98,10 @@ test("rejects conflicts unless force can safely replace them", async (t) => {
   await fs.mkdir(paths.targetDir, { recursive: true });
   const target = path.join(paths.targetDir, "worker.toml");
   await fs.writeFile(target, "user file");
-  await assert.rejects(syncCodexAgents(paths), /link conflict/);
+  await assert.rejects(syncCodexAgents(paths), /file conflict/);
   assert.equal(await fs.readFile(target, "utf8"), "user file");
   await syncCodexAgents({ ...paths, force: true });
-  assert.equal((await fs.lstat(target)).isSymbolicLink(), true);
+  assert.equal(await fs.readFile(target, "utf8"), "worker.toml");
 });
 
 test("rejects a wrong expected symlink but ignores unrelated custom agents", async (t) => {
@@ -67,8 +110,9 @@ test("rejects a wrong expected symlink but ignores unrelated custom agents", asy
   const target = path.join(paths.targetDir, "worker.toml");
   await fs.symlink("foreign-source.toml", target);
   await fs.writeFile(path.join(paths.targetDir, "personal.toml"), "user-owned");
-  await assert.rejects(syncCodexAgents(paths), /link conflict/);
+  await assert.rejects(syncCodexAgents(paths), /file conflict/);
   await syncCodexAgents({ ...paths, force: true });
+  assert.equal((await fs.lstat(target)).isSymbolicLink(), false);
   const report = await inspectCodexAgents(paths);
   assert.deepEqual(adapterProblems(report), []);
   assert.equal(await fs.readFile(path.join(paths.targetDir, "personal.toml"), "utf8"), "user-owned");
@@ -80,18 +124,18 @@ test("force still refuses directories", async (t) => {
   await assert.rejects(syncCodexAgents({ ...paths, force: true }), /Refusing to replace directory/);
 });
 
-test("rolls back replacements and new links after a mid-transaction failure", async (t) => {
+test("rolls back replacements and new copies after a mid-transaction failure", async (t) => {
   const paths = await fixture(t, ["a.toml", "b.toml"]);
   await fs.mkdir(paths.targetDir, { recursive: true });
   await fs.writeFile(path.join(paths.targetDir, "b.toml"), "keep me");
   let calls = 0;
   const failingFs = new Proxy(fs, {
     get(target, property) {
-      if (property !== "symlink") return target[property];
+      if (property !== "copyFile") return target[property];
       return async (...args) => {
         calls += 1;
         if (calls === 2) throw Object.assign(new Error("injected failure"), { code: "EIO" });
-        return target.symlink(...args);
+        return target.copyFile(...args);
       };
     },
   });
@@ -101,33 +145,16 @@ test("rolls back replacements and new links after a mid-transaction failure", as
   assert.deepEqual((await fs.readdir(paths.targetDir)).sort(), ["b.toml"]);
 });
 
-test("uses Windows file symlinks and never falls back to copying", async (t) => {
+test("never creates symlinks, including on Windows", async (t) => {
   const paths = await fixture(t, ["worker.toml"]);
-  const calls = [];
-  const recordingFs = new Proxy(fs, {
+  const noSymlinkFs = new Proxy(fs, {
     get(target, property) {
-      if (property !== "symlink") return target[property];
-      return async (...args) => {
-        calls.push(args);
-        return target.symlink(args[0], args[1]);
-      };
+      if (property === "symlink") return async () => { throw new Error("symlink must not be called"); };
+      return target[property];
     },
   });
-  await syncCodexAgents({ ...paths, platform: "win32", fsApi: recordingFs });
-  assert.equal(calls[0][2], "file");
-
-  const deniedRoot = await fixture(t, ["denied.toml"]);
-  const deniedFs = new Proxy(fs, {
-    get(target, property) {
-      if (property !== "symlink") return target[property];
-      return async () => { throw Object.assign(new Error("denied"), { code: "EPERM" }); };
-    },
-  });
-  await assert.rejects(
-    syncCodexAgents({ ...deniedRoot, platform: "win32", fsApi: deniedFs }),
-    /Developer Mode/,
-  );
-  await assert.rejects(fs.lstat(path.join(deniedRoot.targetDir, "denied.toml")), { code: "ENOENT" });
+  await syncCodexAgents({ ...paths, fsApi: noSymlinkFs });
+  assert.equal(await fs.readFile(path.join(paths.targetDir, "worker.toml"), "utf8"), "worker.toml");
 });
 
 test("respects CODEX_HOME and snapshots only HKB-owned links", async (t) => {
@@ -142,11 +169,15 @@ test("respects CODEX_HOME and snapshots only HKB-owned links", async (t) => {
 
   await syncCodexAgents(paths);
   await fs.symlink("elsewhere.toml", path.join(paths.targetDir, "foreign.toml"));
+  await fs.writeFile(path.join(paths.targetDir, "personal.toml"), "user-owned");
   const snapshots = await snapshotOwnedLinks(paths);
-  assert.deepEqual(snapshots.map((item) => path.basename(item.target)), ["worker.toml"]);
+  assert.deepEqual(snapshots.map((item) => path.basename(item.target)), ["worker.toml", MANIFEST_NAME]);
   await removeOwnedLinks(snapshots);
+  await assert.rejects(fs.lstat(path.join(paths.targetDir, "worker.toml")), { code: "ENOENT" });
+  assert.equal(await fs.readFile(path.join(paths.targetDir, "personal.toml"), "utf8"), "user-owned");
   await restoreOwnedLinks(snapshots);
-  assert.equal((await fs.lstat(path.join(paths.targetDir, "worker.toml"))).isSymbolicLink(), true);
+  assert.equal(await fs.readFile(path.join(paths.targetDir, "worker.toml"), "utf8"), "worker.toml");
+  assert.deepEqual(adapterProblems(await inspectCodexAgents(paths)), []);
 });
 
 test("rejects source symlinks and source directories", async (t) => {

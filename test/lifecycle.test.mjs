@@ -58,25 +58,25 @@ test("fake upstream covers add, update, remove, list, sync, doctor, and rollback
 
   await main(["add", ...selection], dependencies);
   const workerTarget = path.join(cwd, ".codex", "agents", "worker.toml");
-  assert.equal((await fs.lstat(workerTarget)).isSymbolicLink(), true);
+  assert.equal(await fs.readFile(workerTarget, "utf8"), "worker");
 
   await fs.writeFile(path.join(sourceAgents, "reviewer.toml"), "reviewer");
   await main(["update", "--project", "--yes"], dependencies);
-  assert.equal((await fs.lstat(path.join(cwd, ".codex", "agents", "reviewer.toml"))).isSymbolicLink(), true);
+  assert.equal(await fs.readFile(path.join(cwd, ".codex", "agents", "reviewer.toml"), "utf8"), "reviewer");
   await main(["sync", "--project", "--yes"], dependencies);
   await main(["list", "--project", "--json"], dependencies);
   await main(["doctor", "--project", "--json"], dependencies);
 
   failRemove = true;
   await assert.rejects(main(["remove", ...selection], dependencies), /exit code 2/);
-  assert.equal((await fs.lstat(workerTarget)).isSymbolicLink(), true, "failed removal restores links");
+  assert.equal(await fs.readFile(workerTarget, "utf8"), "worker", "failed removal restores copies");
   failRemove = false;
 
   await fs.rm(canonical, { recursive: true });
   installed = false;
   const previousExitCode = process.exitCode;
   await main(["doctor", "--project", "--json"], dependencies);
-  assert.equal(process.exitCode, 1, "doctor reports dangling links");
+  assert.equal(process.exitCode, 1, "doctor reports dangling copies");
   process.exitCode = previousExitCode;
 
   await main(["remove", ...selection], dependencies);

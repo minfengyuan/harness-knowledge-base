@@ -7,7 +7,7 @@ description: Coordinate the project's seven specialized agents through planning,
 
 Lead from the main thread. Use the smallest useful set of roles installed from this skill's `agents/` directory into `.codex/agents/`; the workflow below is routing guidance, not a mandatory pipeline. Keep product, scope, authority, and external-action decisions in the main thread.
 
-Install this skill with `hkb add`, not only `npx skills add`: the upstream installer installs the skill itself, while `hkb` also creates the Codex custom-agent links. Run `hkb sync` to repair those links or `hkb doctor` to inspect them.
+Install this skill with `hkb add`, not only `npx skills add`: the upstream installer installs the skill itself, while `hkb` also copies the Codex custom-agent files. Run `hkb sync` to refresh or repair those copies or `hkb doctor` to inspect them.
 
 ## Rules
 

@@ -187,7 +187,7 @@ async function commandAdd(values, scope, skills, runner, context) {
       const paths = await adapterContext(scope, context, devMode.path);
       await syncCodexAgents({ ...paths, force: values.force });
     } catch (error) {
-      throw new Error(`dev-mode was installed, but its Codex agent links failed: ${error.message}. Run hkb sync to retry.`, { cause: error });
+      throw new Error(`dev-mode was installed, but its Codex agent files failed: ${error.message}. Run hkb sync to retry.`, { cause: error });
     }
   }
   process.stdout.write(`${JSON.stringify(records, null, 2)}\n`);
@@ -198,10 +198,10 @@ async function commandSync(values, scope, runner, context) {
   const paths = await adapterContext(scope, context, canonicalDevMode(installed));
   const result = await syncCodexAgents({ ...paths, force: values.force });
   if (!result.installed) {
-    process.stdout.write("dev-mode is not installed; no links changed.\n");
+    process.stdout.write("dev-mode is not installed; no agent files changed.\n");
     return result;
   }
-  process.stdout.write(`Codex agent links: ${result.created.length} created, ${result.removed.length} removed, ${result.unchanged.length} unchanged.\n`);
+  process.stdout.write(`Codex agent files: ${result.created.length} copied, ${result.removed.length} removed, ${result.unchanged.length} unchanged.\n`);
   return result;
 }
 
@@ -290,7 +290,7 @@ async function commandDoctor(values, scope, runner, context) {
     })),
   };
   if (values.json) process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
-  else if (output.healthy) process.stdout.write("Codex subagent links are healthy.\n");
+  else if (output.healthy) process.stdout.write("Codex subagent files are healthy.\n");
   else for (const problem of output.problems) process.stderr.write(`${problem.name}: ${problem.state} (${problem.path})\n`);
   if (!output.healthy) process.exitCode = 1;
 }

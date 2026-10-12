@@ -77,6 +77,16 @@
     "path": "skills/development/systematic-debugging"
   },
   {
+    "name": "tailscale-api",
+    "description": "Tailscale REST API v2 (api.tailscale.com/api/v2) — devices, keys, ACL, DNS, webhooks, OAuth scopes. Use for managing tailnet objects over HTTP.",
+    "path": "skills/misc/tailscale-api"
+  },
+  {
+    "name": "tailscale-cli",
+    "description": "Complete tailscale CLI usage — all subcommands, flags, and common workflows (v1.96+)",
+    "path": "skills/misc/tailscale-cli"
+  },
+  {
     "name": "tdd",
     "description": "Use when the user requests test-driven development, red-green-refactor, integration tests, or a test-first bug fix.",
     "path": "skills/development/tdd"

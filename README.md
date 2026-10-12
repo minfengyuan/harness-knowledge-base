@@ -53,6 +53,8 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 - [`photo-illustration-styles`](skills/misc/photo-illustration-styles)
 - [`pi-coding-agent`](skills/misc/pi-coding-agent)
 - [`recipe-formatter`](skills/misc/recipe-formatter)
+- [`tailscale-api`](skills/misc/tailscale-api)
+- [`tailscale-cli`](skills/misc/tailscale-cli)
 
 ### Codex
 
@@ -65,10 +67,6 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 npm ci
 npm run check
 ```
-
-## Acknowledgements
-
-Inspired by [obra/superpowers](https://github.com/obra/superpowers) and [garrytan/gstack](https://github.com/garrytan/gstack).
 
 ## License
 

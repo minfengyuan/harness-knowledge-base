@@ -14,6 +14,7 @@ import {
   syncCodexAgents,
 } from "../installer/codex.mjs";
 import { parseAddJson, runSkills } from "../installer/skills.mjs";
+import { generateCatalog } from "../scripts/generate-catalog.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -23,10 +24,11 @@ async function successful(args, options) {
   return result;
 }
 
-test("skills@1.7.0 discovers all 15 repository skills", async () => {
+test("skills@1.7.0 discovers all repository skills", async () => {
+  const expectedCount = (await generateCatalog(repositoryRoot)).length;
   const result = await successful(["add", repositoryRoot, "--list"], { cwd: repositoryRoot });
   const output = stripVTControlCharacters(result.stdout + result.stderr);
-  assert.match(output, /Found 15 skills/);
+  assert.match(output, new RegExp(`Found ${expectedCount} skills\\b`));
 });
 
 test("fixed upstream CLI and adapter complete project and global lifecycles", async (t) => {

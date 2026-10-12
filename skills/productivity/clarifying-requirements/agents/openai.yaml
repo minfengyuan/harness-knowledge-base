@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clarifying Requirements"
+  short_description: "Clarify vague ideas through focused question rounds"
+  default_prompt: "Use $clarifying-requirements to help me turn this idea into clear requirements through iterative questions and a shared brief."

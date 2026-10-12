@@ -44,9 +44,11 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 
 ### Productivity
 
+- [`clarifying-requirements`](skills/productivity/clarifying-requirements) — turns vague ideas into clear requirements through iterative questions
 - [`handoff`](skills/productivity/handoff)
 - [`progressive-disclosure-agents-md`](skills/productivity/progressive-disclosure-agents-md)
 - [`storm-research`](skills/productivity/storm-research)
+- [`writing-prd`](skills/productivity/writing-prd) — writes and revises PRD.md using the VibeVibe PRD template
 
 ### Miscellaneous
 

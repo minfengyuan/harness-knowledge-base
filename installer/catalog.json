@@ -5,6 +5,11 @@
     "path": "skills/development/batch-grill-me"
   },
   {
+    "name": "clarifying-requirements",
+    "description": "Turn vague ideas or requirements into a shared, actionable brief through iterative questions and confirmation. Use when the user wants help defining what they need, narrowing scope, or resolving ambiguity before planning or implementation.",
+    "path": "skills/productivity/clarifying-requirements"
+  },
+  {
     "name": "conventional-commits",
     "description": "Generate Conventional Commits 1.0.0 messages from staged git changes. Use when asked to create a commit message from a staged diff.",
     "path": "skills/development/conventional-commits"
@@ -90,5 +95,10 @@
     "name": "tdd",
     "description": "Use when the user requests test-driven development, red-green-refactor, integration tests, or a test-first bug fix.",
     "path": "skills/development/tdd"
+  },
+  {
+    "name": "writing-prd",
+    "description": "Create or revise PRD.md product requirements documents from discussions, notes, or existing requirements using the VibeVibe PRD template. Use when the user wants a PRD draft, review-ready requirements, or updates to an existing PRD.",
+    "path": "skills/productivity/writing-prd"
   }
 ]

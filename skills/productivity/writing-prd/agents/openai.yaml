@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writing PRD"
+  short_description: "Write and revise PRD.md with the VibeVibe template"
+  default_prompt: "Use $writing-prd to turn our requirements into a PRD.md using the bundled template, with unresolved details clearly marked."

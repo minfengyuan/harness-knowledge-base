@@ -35,6 +35,7 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 ### Development
 
 - [`batch-grill-me`](skills/development/batch-grill-me)
+- [`conventional-branch-naming`](skills/development/conventional-branch-naming)
 - [`conventional-commits`](skills/development/conventional-commits)
 - [`executing-plans`](skills/development/executing-plans)
 - [`plan-ceo-review`](skills/development/plan-ceo-review)

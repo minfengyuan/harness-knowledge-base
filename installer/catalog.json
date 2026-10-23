@@ -10,6 +10,11 @@
     "path": "skills/productivity/clarifying-requirements"
   },
   {
+    "name": "conventional-branch-naming",
+    "description": "Generate one descriptive Git branch name from a task using Conventional Commits 1.0.0 types. Use when asked to name a branch or create a task branch.",
+    "path": "skills/development/conventional-branch-naming"
+  },
+  {
     "name": "conventional-commits",
     "description": "Generate Conventional Commits 1.0.0 messages from staged git changes. Use when asked to create a commit message from a staged diff.",
     "path": "skills/development/conventional-commits"

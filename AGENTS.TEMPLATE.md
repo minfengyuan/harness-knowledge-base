@@ -25,7 +25,24 @@
 - Match local style and touch only what is needed.
 - Remove imports, variables, functions, or references made unused by your own changes. Leave unrelated dead code alone.
 
+## Commits and PR Titles
+
+All commit messages and PR titles MUST follow Conventional Commits 1.0.0.
+
+- Format: `<type>[scope][!]: <description>`.
+- Prefer: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`.
+- Infer the type and optional scope from the staged diff (commits) or overall changes (PRs).
+- Keep descriptions concise, imperative, and lowercase, without trailing periods.
+- Mark breaking changes with `!` or `BREAKING CHANGE:`.
+
 ## Communication
 
 - Lead with the outcome, decision, or material status. Keep prose direct and use lists, tables, or headings only when they make parallel or sequential information easier to scan.
 - Do not add ceremony about internal workflows or tools unless it helps the user understand the result, a blocker, or a material risk.
+
+## Writing Style
+
+- Aim for approximately 80% alignment with ASD-STE100 (Simplified Technical English).
+- Use clear, concise, accurate, and readable language.
+- Prefer short sentences, simple structures, and consistent terminology.
+- Avoid ambiguity, complex syntax, and unnecessary wording.

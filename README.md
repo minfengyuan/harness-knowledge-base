@@ -40,6 +40,7 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 - [`executing-plans`](skills/development/executing-plans)
 - [`plan-ceo-review`](skills/development/plan-ceo-review)
 - [`plan-eng-review`](skills/development/plan-eng-review)
+- [`plan-exp-review`](skills/development/plan-exp-review)
 - [`systematic-debugging`](skills/development/systematic-debugging)
 - [`tdd`](skills/development/tdd)
 

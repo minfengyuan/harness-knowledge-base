@@ -20,6 +20,8 @@ npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 
 > [!NOTE]
 > For Codex [`dev-mode`](.codex/skills/dev-mode), also copy [`.codex/agents/`](.codex/agents) into your project's `.codex/agents/` directory (or `$CODEX_HOME/agents/` for global installs) so its seven custom subagents are available.
+>
+> For [`hc-orchestrate`](skills/development/hc-orchestrate), also copy [`templates/`](skills/development/hc-orchestrate/templates) into `~/.config/herdr-core/templates/` (and adjust model flags or ensure `codex`, `agy`, and `claude` are on `hc`'s `PATH`).
 
 ## Skills
 
@@ -29,6 +31,7 @@ npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 - [`conventional-branch-naming`](skills/development/conventional-branch-naming)
 - [`conventional-commits`](skills/development/conventional-commits)
 - [`executing-plans`](skills/development/executing-plans)
+- [`hc-orchestrate`](skills/development/hc-orchestrate)
 - [`plan-ceo-review`](skills/development/plan-ceo-review)
 - [`plan-eng-review`](skills/development/plan-eng-review)
 - [`plan-exp-review`](skills/development/plan-exp-review)

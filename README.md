@@ -55,8 +55,6 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 ### Miscellaneous
 
 - [`photo-illustration-styles`](skills/misc/photo-illustration-styles)
-- [`pi-coding-agent`](skills/misc/pi-coding-agent)
-- [`recipe-formatter`](skills/misc/recipe-formatter)
 - [`tailscale-api`](skills/misc/tailscale-api)
 - [`tailscale-cli`](skills/misc/tailscale-cli)
 

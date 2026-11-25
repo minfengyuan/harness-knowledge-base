@@ -6,29 +6,20 @@ Most skills work with any agent supported by the [skills CLI](https://github.com
 
 ## Install
 
-For most agents:
+Install skills with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
 npx skills add minfengyuan/harness-knowledge-base
 ```
 
-For Codex `dev-mode`, use the HKB installer so its custom agents are wired up as well:
+To install a specific skill:
 
 ```sh
-npx --package @minfengyuan/harness-knowledge-base hkb add
+npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 ```
-
-For non-interactive project installation:
-
-```sh
-npx --package @minfengyuan/harness-knowledge-base hkb add \
-  --project --skill dev-mode --agent codex --yes
-```
-
-The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. Run `hkb --help` for options.
 
 > [!NOTE]
-> `dev-mode` copies its Codex subagent files into `.codex/agents/` (or `$CODEX_HOME/agents/` for global installs); no symlinks are created. Run `hkb sync` after updating to refresh the copies; existing symlinks from older HKB versions are replaced with copies. The HKB wrapper requires Node.js 22.20.0 or newer.
+> For Codex [`dev-mode`](.codex/skills/dev-mode), also copy [`.codex/agents/`](.codex/agents) into your project's `.codex/agents/` directory (or `$CODEX_HOME/agents/` for global installs) so its seven custom subagents are available.
 
 ## Skills
 
@@ -62,13 +53,6 @@ The HKB wrapper also supports `update`, `remove`, `sync`, `list`, and `doctor`. 
 
 - [`dev-mode`](.codex/skills/dev-mode) — coordinates seven specialized Codex subagents
 - [`optimize-astra-instructions`](.codex/skills/optimize-astra-instructions) — audits and revises instructions for GPT-6 Astra
-
-## Development
-
-```sh
-npm ci
-npm run check
-```
 
 ## License
 

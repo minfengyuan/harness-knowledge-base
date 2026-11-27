@@ -1,0 +1,5 @@
+interface:
+  display_name: "No Comments"
+  short_description: "Audit and delete unnecessary comments, then fix root causes"
+policy:
+  allow_implicit_invocation: false

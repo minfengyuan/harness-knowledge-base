@@ -1,0 +1,5 @@
+interface:
+  display_name: "Blast Radius"
+  short_description: "Find cross-cutting breakage beyond a diff and prove safety with real code"
+policy:
+  allow_implicit_invocation: false

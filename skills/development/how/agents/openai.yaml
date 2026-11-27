@@ -1,0 +1,5 @@
+interface:
+  display_name: "How"
+  short_description: "Explain how a codebase subsystem works in one read-only pass"
+policy:
+  allow_implicit_invocation: false

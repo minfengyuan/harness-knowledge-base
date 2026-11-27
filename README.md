@@ -28,9 +28,13 @@ npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 ### Development
 
 - [`batch-grill-me`](skills/development/batch-grill-me)
+- [`blast-radius`](skills/development/blast-radius)
 - [`conventional-branch-naming`](skills/development/conventional-branch-naming)
 - [`conventional-commits`](skills/development/conventional-commits)
+- [`correct`](skills/development/correct)
 - [`hc-orchestrate`](skills/development/hc-orchestrate)
+- [`how`](skills/development/how)
+- [`no-comments`](skills/development/no-comments)
 - [`plan-ceo-review`](skills/development/plan-ceo-review)
 - [`plan-eng-review`](skills/development/plan-eng-review)
 - [`plan-exp-review`](skills/development/plan-exp-review)
@@ -43,6 +47,7 @@ npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 - [`handoff`](skills/productivity/handoff)
 - [`progressive-disclosure-agents-md`](skills/productivity/progressive-disclosure-agents-md)
 - [`storm-research`](skills/productivity/storm-research)
+- [`unslop`](skills/productivity/unslop)
 - [`writing-prd`](skills/productivity/writing-prd) — writes and revises PRD.md using the VibeVibe PRD template
 
 ### Miscellaneous

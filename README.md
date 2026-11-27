@@ -30,7 +30,6 @@ npx skills add minfengyuan/harness-knowledge-base --skill <skill-name>
 - [`batch-grill-me`](skills/development/batch-grill-me)
 - [`conventional-branch-naming`](skills/development/conventional-branch-naming)
 - [`conventional-commits`](skills/development/conventional-commits)
-- [`executing-plans`](skills/development/executing-plans)
 - [`hc-orchestrate`](skills/development/hc-orchestrate)
 - [`plan-ceo-review`](skills/development/plan-ceo-review)
 - [`plan-eng-review`](skills/development/plan-eng-review)

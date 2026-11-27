@@ -1,6 +1,6 @@
 ---
 name: hc-orchestrate
-description: Orchestrate multi-agent software workflows across local hc (herdr-core) templates (researcher, plan-reviewer, codex-worker, verifier, code-reviewer). Use when a task benefits from parallel discovery, plan validation, bounded implementation, low-cost test/typecheck verification, or independent code review over persistent hc terminals. Do not use for trivial single-step edits or simple lookups.
+description: Orchestrate multi-agent software workflows across local hc (herdr-core) templates (researcher, plan-reviewer, backend-worker, frontend-worker, verifier, code-reviewer). Use when a task benefits from parallel discovery, plan validation, bounded backend/frontend implementation, low-cost test/typecheck verification, or independent code review over persistent hc terminals. Do not use for trivial single-step edits or simple lookups.
 ---
 
 # HC Orchestrate
@@ -28,7 +28,8 @@ Delegate only when it provides a clear benefit:
 | --- | --- | --- |
 | `researcher` | Parallel read-only code search, doc/PDF reading, audio/video understanding, web retrieval | Editing files or running builds |
 | `plan-reviewer` | Verifying plan assumptions against the codebase; reviewing architecture, scope, and risks | Editing files or implementing |
-| `codex-worker` | Bounded implementation, bug fixes, refactoring, and targeted unit checks | Unowned files or recursive delegation |
+| `backend-worker` | Bounded backend implementation (APIs, services, data models, CLI/tooling), bug fixes, and targeted unit checks | Frontend UI work, unowned files, or recursive delegation |
+| `frontend-worker` | Bounded frontend implementation (UI components, styling, client state, interactions), bug fixes, and UI checks | Backend/server work, unowned files, or recursive delegation |
 | `verifier` | Running type checks, linters (when requested), and test scripts; reporting factual pass/fail results | Modifying source code |
 | `code-reviewer` | Independent diff, caller, and test review for bugs, edge cases, lifecycle, and security | Applying fixes |
 
@@ -37,12 +38,12 @@ If `hc templates` lists extra role templates, route to them by their `descriptio
 ## Orchestration Rules
 
 - **Flat star topology**: Only the main terminal starts and cleans up child terminals. Instruct every child not to spawn subagents.
-- **Single-writer ownership**: Assign strictly disjoint file or directory ownership to concurrent `codex-worker` terminals, or isolate each in its own git worktree (`--cwd <worktree>`). Keep the main thread read-only on worker-owned files until the worker finishes.
+- **Single-writer ownership**: Assign strictly disjoint file or directory ownership to concurrent `backend-worker` / `frontend-worker` terminals, or isolate each in its own git worktree (`--cwd <worktree>`). Keep the main thread read-only on worker-owned files until the worker finishes.
 - **Self-contained brief**: Include the outcome, relevant files/context, exact write ownership (or read-only constraint), stop conditions, and the reporting command (`hc send $HC_TERMINAL_ID` when set). If a brief is long, write it to a scratch file and pass the path in the launch message.
 - **Check launch readiness**: Launch with `hc run --bg --name <slug> --cwd <repo-path> <template> "<brief>"`. Check `first_message.sent`; if `false`, run `hc read <slug>` to resolve any startup dialog before running `hc send <slug>`.
 - **Event-driven waits only**: Use `hc wait --children any`, `hc wait --children all`, or `hc wait <slug>`. Never `sleep` or poll in a loop. On `reason: timeout`, inspect with `hc get`/`hc read` or wait again.
 - **Blocked or error handling**: When a child reports `blocked` or `error`, run `hc read <slug>` and ask the user before approving permissions or answering dialogs. Never bypass a prompt with `hc send --force`.
-- **Reuse vs fresh judgment**: Reuse an existing `codex-worker` via `hc send <slug>` for fix iterations so it keeps its context. Use a fresh `code-reviewer` for independent post-fix review when the change is consequential.
+- **Reuse vs fresh judgment**: Reuse an existing `backend-worker` or `frontend-worker` via `hc send <slug>` for fix iterations so it keeps its context. Use a fresh `code-reviewer` for independent post-fix review when the change is consequential.
 - **Cleanup**: Once results are accepted, kill and remove only the terminals you started (`hc kill <slug> && hc rm <slug>`). Leave the user's pre-existing terminals untouched.
 
 ## Workflow
@@ -68,11 +69,12 @@ hc wait plan-rev
 
 ### 3. Implement (Bounded Write)
 
-Launch `codex-worker` with explicit file ownership and expected local checks:
+Launch `backend-worker` and/or `frontend-worker` with explicit, disjoint file ownership and expected local checks:
 
 ```sh
-hc run --bg --name worker-api --cwd /path/to/repo codex-worker "Implement X in src/api/. Do not edit files outside src/api/ or spawn subagents. Run unit tests for src/api/. Report changed files and check results via hc send $HC_TERMINAL_ID."
-hc wait worker-api
+hc run --bg --name worker-api --cwd /path/to/repo backend-worker "Implement X in src/api/. Do not edit files outside src/api/ or spawn subagents. Run unit tests for src/api/. Report changed files and check results via hc send $HC_TERMINAL_ID."
+hc run --bg --name worker-ui --cwd /path/to/repo frontend-worker "Build Y in src/ui/. Do not edit files outside src/ui/ or spawn subagents. Run frontend typecheck and tests for src/ui/. Report changed files and check results via hc send $HC_TERMINAL_ID."
+hc wait --children all
 ```
 
 ### 4. Verify Gate (Default Before Review)
@@ -99,7 +101,7 @@ hc wait review
 
 If `verifier` fails or `code-reviewer` reports blockers:
 
-1. Send the concrete failure output or blocker list to the owning `codex-worker` via `hc send worker-api "<evidence and smallest repair scope>"`.
+1. Send the concrete failure output or blocker list to the owning `backend-worker` or `frontend-worker` via `hc send <worker-slug> "<evidence and smallest repair scope>"`.
 2. Re-run `verifier` after the fix.
 3. Re-run `code-reviewer` if the repair changed behavior or touched sensitive logic.
 
